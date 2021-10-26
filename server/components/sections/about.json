@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_abouts",
+  "info": {
+    "name": "about",
+    "icon": "atom",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "work": {
+      "type": "string"
+    },
+    "blogs": {
+      "type": "string"
+    },
+    "watch": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}

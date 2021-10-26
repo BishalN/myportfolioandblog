@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_sections_works",
+  "info": {
+    "name": "works",
+    "icon": "ambulance"
+  },
+  "options": {},
+  "attributes": {
+    "project": {
+      "type": "json"
+    }
+  }
+}
