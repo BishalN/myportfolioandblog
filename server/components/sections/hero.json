@@ -22,8 +22,7 @@
       "pluginOptions": {}
     },
     "navlinks": {
-      "type": "json",
-      "required": true
+      "type": "string"
     }
   }
 }

@@ -27,11 +27,6 @@
       "repeatable": false,
       "component": "sections.about"
     },
-    "works": {
-      "type": "component",
-      "repeatable": false,
-      "component": "sections.works"
-    },
     "Contacts": {
       "type": "component",
       "repeatable": false,

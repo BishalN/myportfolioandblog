@@ -24,6 +24,7 @@
     "strapi-plugin-i18n": "3.6.8",
     "strapi-plugin-upload": "3.6.8",
     "strapi-plugin-users-permissions": "3.6.8",
+    "strapi-provider-upload-google-cloud-storage": "^3.6.8",
     "strapi-utils": "3.6.8"
   },
   "author": {
