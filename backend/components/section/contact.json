@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_section_contacts",
+  "info": {
+    "name": "contact",
+    "icon": "address-book"
+  },
+  "options": {},
+  "attributes": {
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "insta": {
+      "type": "string",
+      "required": true
+    },
+    "youtube": {
+      "type": "string",
+      "required": true
+    },
+    "twitter": {
+      "type": "string",
+      "required": true
+    },
+    "linkedin": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

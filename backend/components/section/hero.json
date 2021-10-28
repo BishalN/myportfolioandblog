@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_section_heroes",
+  "info": {
+    "name": "Hero",
+    "icon": "ambulance"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "navlinks": {
+      "type": "string",
+      "required": true
+    },
+    "profile": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    }
+  }
+}

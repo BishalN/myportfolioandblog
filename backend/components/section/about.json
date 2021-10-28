@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_section_abouts",
+  "info": {
+    "name": "about",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "work": {
+      "type": "string",
+      "required": true
+    },
+    "blogs": {
+      "type": "string",
+      "required": true
+    },
+    "watch": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
