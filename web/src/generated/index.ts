@@ -197,7 +197,7 @@ export type LocaleInput = {
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type Morph = ComponentSectionAbout | ComponentSectionContact | ComponentSectionHero | ComponentSectionProjects | Homepage | I18NLocale | Playlist | PlaylistAggregator | PlaylistConnection | PlaylistConnectionCreated_At | PlaylistConnectionDescription | PlaylistConnectionId | PlaylistConnectionPosts | PlaylistConnectionPublished_At | PlaylistConnectionTitle | PlaylistConnectionUpdated_At | PlaylistGroupBy | Posts | PostsAggregator | PostsConnection | PostsConnectionCreated_At | PostsConnectionDescription | PostsConnectionId | PostsConnectionPublished_At | PostsConnectionTitle | PostsConnectionTopics | PostsConnectionUpdated_At | PostsConnectionWriter | PostsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | Writer | WriterAggregator | WriterConnection | WriterConnectionAvatar | WriterConnectionBio | WriterConnectionCreated_At | WriterConnectionId | WriterConnectionName | WriterConnectionPublished_At | WriterConnectionUpdated_At | WriterGroupBy | CreatePlaylistPayload | CreatePostPayload | CreateRolePayload | CreateUserPayload | CreateWriterPayload | DeleteFilePayload | DeleteHomepagePayload | DeletePlaylistPayload | DeletePostPayload | DeleteRolePayload | DeleteUserPayload | DeleteWriterPayload | UpdateHomepagePayload | UpdatePlaylistPayload | UpdatePostPayload | UpdateRolePayload | UpdateUserPayload | UpdateWriterPayload;
+export type Morph = ComponentSectionAbout | ComponentSectionContact | ComponentSectionHero | ComponentSectionProjects | Homepage | I18NLocale | Playlist | PlaylistAggregator | PlaylistConnection | PlaylistConnectionCreated_At | PlaylistConnectionDescription | PlaylistConnectionId | PlaylistConnectionPublished_At | PlaylistConnectionSlug | PlaylistConnectionTitle | PlaylistConnectionUpdated_At | PlaylistGroupBy | Posts | PostsAggregator | PostsConnection | PostsConnectionCreated_At | PostsConnectionDescription | PostsConnectionId | PostsConnectionPlaylist | PostsConnectionPublished_At | PostsConnectionSlug | PostsConnectionTitle | PostsConnectionTopics | PostsConnectionUpdated_At | PostsConnectionWriter | PostsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | Writer | WriterAggregator | WriterConnection | WriterConnectionAvatar | WriterConnectionBio | WriterConnectionCreated_At | WriterConnectionId | WriterConnectionName | WriterConnectionPublished_At | WriterConnectionUpdated_At | WriterGroupBy | CreatePlaylistPayload | CreatePostPayload | CreateRolePayload | CreateUserPayload | CreateWriterPayload | DeleteFilePayload | DeleteHomepagePayload | DeletePlaylistPayload | DeletePostPayload | DeleteRolePayload | DeleteUserPayload | DeleteWriterPayload | UpdateHomepagePayload | UpdatePlaylistPayload | UpdatePostPayload | UpdateRolePayload | UpdateUserPayload | UpdateWriterPayload;
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -378,10 +378,19 @@ export type Playlist = {
   created_at: Scalars['DateTime'];
   description: Scalars['String'];
   id: Scalars['ID'];
-  posts?: Maybe<Posts>;
+  posts?: Maybe<Array<Maybe<Posts>>>;
   published_at?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
   title: Scalars['String'];
   updated_at: Scalars['DateTime'];
+};
+
+
+export type PlaylistPostsArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
 };
 
 export type PlaylistAggregator = {
@@ -415,16 +424,16 @@ export type PlaylistConnectionId = {
   key?: Maybe<Scalars['ID']>;
 };
 
-export type PlaylistConnectionPosts = {
-  __typename?: 'PlaylistConnectionPosts';
-  connection?: Maybe<PlaylistConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
 export type PlaylistConnectionPublished_At = {
   __typename?: 'PlaylistConnectionPublished_at';
   connection?: Maybe<PlaylistConnection>;
   key?: Maybe<Scalars['DateTime']>;
+};
+
+export type PlaylistConnectionSlug = {
+  __typename?: 'PlaylistConnectionSlug';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['String']>;
 };
 
 export type PlaylistConnectionTitle = {
@@ -444,8 +453,8 @@ export type PlaylistGroupBy = {
   created_at?: Maybe<Array<Maybe<PlaylistConnectionCreated_At>>>;
   description?: Maybe<Array<Maybe<PlaylistConnectionDescription>>>;
   id?: Maybe<Array<Maybe<PlaylistConnectionId>>>;
-  posts?: Maybe<Array<Maybe<PlaylistConnectionPosts>>>;
   published_at?: Maybe<Array<Maybe<PlaylistConnectionPublished_At>>>;
+  slug?: Maybe<Array<Maybe<PlaylistConnectionSlug>>>;
   title?: Maybe<Array<Maybe<PlaylistConnectionTitle>>>;
   updated_at?: Maybe<Array<Maybe<PlaylistConnectionUpdated_At>>>;
 };
@@ -453,8 +462,9 @@ export type PlaylistGroupBy = {
 export type PlaylistInput = {
   created_by?: Maybe<Scalars['ID']>;
   description: Scalars['String'];
-  posts?: Maybe<Scalars['ID']>;
+  posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
   published_at?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
   title: Scalars['String'];
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -462,8 +472,9 @@ export type PlaylistInput = {
 export type PostInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
-  playlists?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  playlist?: Maybe<Scalars['ID']>;
   published_at?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
   title: Scalars['String'];
   topics: Scalars['String'];
   updated_by?: Maybe<Scalars['ID']>;
@@ -475,20 +486,13 @@ export type Posts = {
   created_at: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  playlists?: Maybe<Array<Maybe<Playlist>>>;
+  playlist?: Maybe<Playlist>;
   published_at?: Maybe<Scalars['DateTime']>;
+  slug: Scalars['String'];
   title: Scalars['String'];
   topics: Scalars['String'];
   updated_at: Scalars['DateTime'];
   writer?: Maybe<Writer>;
-};
-
-
-export type PostsPlaylistsArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
 };
 
 export type PostsAggregator = {
@@ -522,10 +526,22 @@ export type PostsConnectionId = {
   key?: Maybe<Scalars['ID']>;
 };
 
+export type PostsConnectionPlaylist = {
+  __typename?: 'PostsConnectionPlaylist';
+  connection?: Maybe<PostsConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
 export type PostsConnectionPublished_At = {
   __typename?: 'PostsConnectionPublished_at';
   connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['DateTime']>;
+};
+
+export type PostsConnectionSlug = {
+  __typename?: 'PostsConnectionSlug';
+  connection?: Maybe<PostsConnection>;
+  key?: Maybe<Scalars['String']>;
 };
 
 export type PostsConnectionTitle = {
@@ -557,7 +573,9 @@ export type PostsGroupBy = {
   created_at?: Maybe<Array<Maybe<PostsConnectionCreated_At>>>;
   description?: Maybe<Array<Maybe<PostsConnectionDescription>>>;
   id?: Maybe<Array<Maybe<PostsConnectionId>>>;
+  playlist?: Maybe<Array<Maybe<PostsConnectionPlaylist>>>;
   published_at?: Maybe<Array<Maybe<PostsConnectionPublished_At>>>;
+  slug?: Maybe<Array<Maybe<PostsConnectionSlug>>>;
   title?: Maybe<Array<Maybe<PostsConnectionTitle>>>;
   topics?: Maybe<Array<Maybe<PostsConnectionTopics>>>;
   updated_at?: Maybe<Array<Maybe<PostsConnectionUpdated_At>>>;
@@ -1443,8 +1461,9 @@ export type EditLocaleInput = {
 export type EditPlaylistInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
-  posts?: Maybe<Scalars['ID']>;
+  posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
   published_at?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1452,8 +1471,9 @@ export type EditPlaylistInput = {
 export type EditPostInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
-  playlists?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  playlist?: Maybe<Scalars['ID']>;
   published_at?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   topics?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -1553,12 +1573,84 @@ export type UpdateWriterPayload = {
   writer?: Maybe<Writer>;
 };
 
+export type BlogQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type BlogQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Posts', id: string, title: string, created_at: any, updated_at: any, topics: string, description?: string | null | undefined, slug: string, writer?: { __typename?: 'Writer', id: string, name: string, bio: string, avatar?: { __typename?: 'UploadFile', url: string } | null | undefined } | null | undefined, playlist?: { __typename?: 'Playlist', title: string, slug: string, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined };
+
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type HomePageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', hero?: { __typename?: 'ComponentSectionHero', title: string, navlinks: string, profile?: Array<{ __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined> | null | undefined } | null | undefined, about?: { __typename?: 'ComponentSectionAbout', work: string, blogs: string, watch: string, email: string } | null | undefined, projects?: Array<{ __typename?: 'ComponentSectionProjects', title: string, description: string, tools: string, url: string, bg?: { __typename?: 'UploadFile', url: string } | null | undefined, image?: { __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined } | null | undefined> | null | undefined, contact?: { __typename?: 'ComponentSectionContact', email: string, insta: string, youtube: string, twitter: string, linkedin: string, title: string } | null | undefined } | null | undefined, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined } | null | undefined> | null | undefined };
 
+export type StaticPlaylistsPathQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
+
+export type StaticPlaylistsPathQueryQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', slug: string } | null | undefined> | null | undefined };
+
+export type StaticPostsPathQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type StaticPostsPathQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Posts', slug: string } | null | undefined> | null | undefined };
+
+export type PlaylistPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PlaylistPageQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, slug: string, description: string, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+
+export type PlaylistPostsQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type PlaylistPostsQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, description: string, posts?: Array<{ __typename?: 'Posts', id: string, title: string, topics: string, slug: string, description?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+
+
+export const BlogDocument = `
+    query Blog($slug: String!) {
+  posts(where: {slug: $slug}) {
+    id
+    title
+    created_at
+    updated_at
+    topics
+    description
+    slug
+    writer {
+      id
+      name
+      bio
+      avatar {
+        url
+      }
+    }
+    playlist {
+      title
+      slug
+      posts {
+        title
+        topics
+        description
+        slug
+      }
+    }
+  }
+}
+    `;
+export const useBlogQuery = <
+      TData = BlogQuery,
+      TError = unknown
+    >(
+      variables: BlogQueryVariables,
+      options?: UseQueryOptions<BlogQuery, TError, TData>
+    ) =>
+    useQuery<BlogQuery, TError, TData>(
+      ['Blog', variables],
+      fetcher<BlogQuery, BlogQueryVariables>(BlogDocument, variables),
+      options
+    );
 export const HomePageDocument = `
     query HomePage {
   homepage {
@@ -1619,5 +1711,99 @@ export const useHomePageQuery = <
     useQuery<HomePageQuery, TError, TData>(
       variables === undefined ? ['HomePage'] : ['HomePage', variables],
       fetcher<HomePageQuery, HomePageQueryVariables>(HomePageDocument, variables),
+      options
+    );
+export const StaticPlaylistsPathQueryDocument = `
+    query StaticPlaylistsPathQuery {
+  playlists {
+    slug
+  }
+}
+    `;
+export const useStaticPlaylistsPathQueryQuery = <
+      TData = StaticPlaylistsPathQueryQuery,
+      TError = unknown
+    >(
+      variables?: StaticPlaylistsPathQueryQueryVariables,
+      options?: UseQueryOptions<StaticPlaylistsPathQueryQuery, TError, TData>
+    ) =>
+    useQuery<StaticPlaylistsPathQueryQuery, TError, TData>(
+      variables === undefined ? ['StaticPlaylistsPathQuery'] : ['StaticPlaylistsPathQuery', variables],
+      fetcher<StaticPlaylistsPathQueryQuery, StaticPlaylistsPathQueryQueryVariables>(StaticPlaylistsPathQueryDocument, variables),
+      options
+    );
+export const StaticPostsPathDocument = `
+    query StaticPostsPath {
+  posts {
+    slug
+  }
+}
+    `;
+export const useStaticPostsPathQuery = <
+      TData = StaticPostsPathQuery,
+      TError = unknown
+    >(
+      variables?: StaticPostsPathQueryVariables,
+      options?: UseQueryOptions<StaticPostsPathQuery, TError, TData>
+    ) =>
+    useQuery<StaticPostsPathQuery, TError, TData>(
+      variables === undefined ? ['StaticPostsPath'] : ['StaticPostsPath', variables],
+      fetcher<StaticPostsPathQuery, StaticPostsPathQueryVariables>(StaticPostsPathDocument, variables),
+      options
+    );
+export const PlaylistPageDocument = `
+    query PlaylistPage {
+  playlists {
+    id
+    title
+    slug
+    description
+    posts {
+      title
+      topics
+      description
+      slug
+    }
+  }
+}
+    `;
+export const usePlaylistPageQuery = <
+      TData = PlaylistPageQuery,
+      TError = unknown
+    >(
+      variables?: PlaylistPageQueryVariables,
+      options?: UseQueryOptions<PlaylistPageQuery, TError, TData>
+    ) =>
+    useQuery<PlaylistPageQuery, TError, TData>(
+      variables === undefined ? ['PlaylistPage'] : ['PlaylistPage', variables],
+      fetcher<PlaylistPageQuery, PlaylistPageQueryVariables>(PlaylistPageDocument, variables),
+      options
+    );
+export const PlaylistPostsDocument = `
+    query PlaylistPosts($slug: String!) {
+  playlists(where: {slug: $slug}) {
+    id
+    title
+    description
+    posts {
+      id
+      title
+      topics
+      slug
+      description
+    }
+  }
+}
+    `;
+export const usePlaylistPostsQuery = <
+      TData = PlaylistPostsQuery,
+      TError = unknown
+    >(
+      variables: PlaylistPostsQueryVariables,
+      options?: UseQueryOptions<PlaylistPostsQuery, TError, TData>
+    ) =>
+    useQuery<PlaylistPostsQuery, TError, TData>(
+      ['PlaylistPosts', variables],
+      fetcher<PlaylistPostsQuery, PlaylistPostsQueryVariables>(PlaylistPostsDocument, variables),
       options
     );

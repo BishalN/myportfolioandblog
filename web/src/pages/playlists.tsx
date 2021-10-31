@@ -1,14 +1,27 @@
 import { Box, Container, Flex, Link, Text } from '@chakra-ui/layout';
 import { Tooltip, VStack } from '@chakra-ui/react';
+import { request } from 'graphql-request';
+import { GetStaticProps } from 'next';
 import React from 'react';
-import { BlogCard } from './index';
+import { BlogCard } from '../components/BlogCard';
+import { PlaylistPageQuery } from '../generated';
+import { playlistPageQuery } from '../graphql/queries/playlist';
+import { baseUrl } from '../utils/baseUrl';
 
-//If you use the same named component inside the parenet component
-//then it does not through error rather it crashes with vm error
+export const getStaticProps: GetStaticProps = async (context) => {
+  const playlistPageData: PlaylistPageQuery = await request(
+    baseUrl,
+    playlistPageQuery
+  );
+  return {
+    props: playlistPageData,
+  };
+};
 
-const PlaylistCollection = () => {
+const PlaylistCollection = (props: PlaylistPageQuery) => {
+  console.log(props);
   return (
-    <Container maxW='container.xl' overflow='hidden'>
+    <Container my='5' maxW='container.xl' overflow='hidden'>
       <Box mb='5' ml='3'>
         <Text as='h2' fontSize={{ base: '2xl', md: '5xl' }}>
           Welcome to Blog playlist
@@ -18,110 +31,32 @@ const PlaylistCollection = () => {
           or subject
         </Text>
       </Box>
-      <VStack>
-        <PlayList
-          title='Nestjs course'
-          blogs={[
-            {
-              title: 'Creating CRUD Rest API using nestjs',
-              categories: ['Nestjs course'],
-              description:
-                'This is the course for creating the rest endpoints using nestjs',
-            },
-            {
-              title: 'Creating CRUD Rest API using nestjs',
-              categories: ['Nestjs course'],
-              description:
-                'This is the course for creating the rest endpoints using nestjs',
-            },
-            {
-              title: 'Creating CRUD Rest API using nestjs',
-              categories: ['Nestjs course'],
-              description:
-                'This is the course for creating the rest endpoints using nestjs',
-            },
-          ]}
-        />
-
-        <PlayList
-          title='Graphql course'
-          blogs={[
-            {
-              title: 'Creating CRUD Rest API using Graphql',
-              categories: ['Graphql course'],
-              description:
-                'This is the course for creating the rest endpoints using Graphql',
-            },
-            {
-              title: 'Creating CRUD Rest API using Graphql',
-              categories: ['Graphql course'],
-              description:
-                'This is the course for creating the rest endpoints using Graphql',
-            },
-            {
-              title: 'Creating CRUD Rest API using Graphql',
-              categories: ['Graphql course'],
-              description:
-                'This is the course for creating the rest endpoints using Graphql',
-            },
-          ]}
-        />
-
-        <PlayList
-          title='BlockChain course'
-          blogs={[
-            {
-              title: 'Creating CRUD Rest API using BlockChain',
-              categories: ['BlockChain course'],
-              description:
-                'This is the course for creating the rest endpoints using BlockChain',
-            },
-            {
-              title: 'Creating CRUD Rest API using BlockChain',
-              categories: ['BlockChain course'],
-              description:
-                'This is the course for creating the rest endpoints using BlockChain',
-            },
-            {
-              title: 'Creating CRUD Rest API using BlockChain',
-              categories: ['BlockChain course'],
-              description:
-                'This is the course for creating the rest endpoints using BlockChain',
-            },
-          ]}
-        />
-
-        <PlayList
-          title='Nodejs course'
-          blogs={[
-            {
-              title: 'Creating CRUD Rest API using Nodejs',
-              categories: ['Nodejs course'],
-              description:
-                'This is the course for creating the rest endpoints using Nodejs',
-            },
-            {
-              title: 'Creating CRUD Rest API using Nodejs',
-              categories: ['Nodejs course'],
-              description:
-                'This is the course for creating the rest endpoints using Nodejs',
-            },
-            {
-              title: 'Creating CRUD Rest API using Nodejs',
-              categories: ['Nodejs course'],
-              description:
-                'This is the course for creating the rest endpoints using Nodejs',
-            },
-          ]}
-        />
+      <VStack spacing='5'>
+        {props.playlists.map((playlist) => {
+          console.log(playlist.slug);
+          return (
+            <PlayList
+              key={playlist.title}
+              slug={playlist.slug}
+              title={playlist.title}
+              blogs={playlist.posts as Blog[]}
+            />
+          );
+        })}
       </VStack>
     </Container>
   );
 };
 
-export type Blog = { title: string; description: string; categories: string[] };
+export type Blog = {
+  title: string;
+  description: string;
+  topics: string;
+  slug: string;
+};
 
 type PlayListProps = {
+  slug: string;
   title: string;
   blogs: Blog[];
 };
@@ -130,23 +65,23 @@ export const PlayList: React.FC<PlayListProps> = ({
   children,
   blogs,
   title,
+  slug,
 }) => {
   return (
-    <Box>
-      <Text as='h2' ml={{ base: '3', md: '3' }} fontSize='2xl'>
+    <Box w='full'>
+      <Text as='h2' mb='-4' ml={{ base: '3', md: '3' }} fontSize='2xl'>
         <Tooltip label='See all the blogs in this playlist'>
-          <Link href='#' target='_blank'>
-            {title}
-          </Link>
+          <Link href={`/playlist/${slug}`}>{title}</Link>
         </Tooltip>
       </Text>
       <Flex flexWrap='wrap'>
         {blogs.map((blog) => (
           <BlogCard
+            slug={blog.slug}
             key={blog.title}
             title={blog.title}
             description={blog.description}
-            categories={blog.categories}
+            topics={blog.topics.split(',')}
           />
         ))}
       </Flex>

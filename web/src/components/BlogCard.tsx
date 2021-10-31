@@ -3,7 +3,9 @@ import { Box, Text, Link, Badge, Stack, Button } from '@chakra-ui/react';
 type BlogCardItemProps = {
   title: string;
   topics?: string[];
-  description: string;
+  description?: string;
+  noOfLines?: number;
+  slug: string;
 };
 
 export const BlogCard: React.FC<BlogCardItemProps> = ({
@@ -11,6 +13,8 @@ export const BlogCard: React.FC<BlogCardItemProps> = ({
   children,
   topics,
   description,
+  noOfLines,
+  slug,
 }) => {
   return (
     <Box
@@ -22,19 +26,18 @@ export const BlogCard: React.FC<BlogCardItemProps> = ({
       bg='gray.300'
     >
       <Text fontSize='xl' isTruncated color='green.500'>
-        <Link href='#' target='_blank'>
+        <Link href={`/blog/${slug}`} target='_blank'>
           {title}
         </Link>
       </Text>
 
       <Stack direction='row' my='2'>
-        {topics.map((category) => (
-          <Badge key={category}>{category}</Badge>
+        {topics.map((topic) => (
+          <Badge key={topic}>{topic}</Badge>
         ))}
-        <Badge colorScheme='green'>20th dec,2020</Badge>
       </Stack>
 
-      <Text noOfLines={10}>{description}</Text>
+      <Text noOfLines={noOfLines || 10}>{description}</Text>
 
       <Box display='flex' justifyContent='end'>
         <Button>Read Blog</Button>

@@ -1,0 +1,14 @@
+query PlaylistPage {
+  playlists {
+    id
+    title
+    slug
+    description
+    posts {
+      title
+      topics
+      description
+      slug
+    }
+  }
+}

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "playlists",
   "info": {
-    "name": "playlist"
+    "name": "playlist",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -20,8 +21,12 @@
       "required": true
     },
     "posts": {
-      "via": "playlists",
-      "model": "posts"
+      "collection": "posts"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

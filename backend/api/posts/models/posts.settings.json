@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "playlists": {
-      "via": "posts",
-      "collection": "playlist"
-    },
     "topics": {
       "type": "string",
       "required": true
@@ -34,6 +30,9 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "playlist": {
+      "model": "playlist"
     }
   }
 }

@@ -172,45 +172,48 @@ export default function Home(props: HomePageQuery) {
 
       {/* work section */}
       <section>
-        {props.homepage.projects.map((proj) => {
-          return (
-            <Box
-              key={proj.title}
-              backgroundImage={`url(${proj.bg.url})`}
-              mt='10'
-            >
-              <Box
-                maxW='xl'
-                px={{ base: '10', md: '32' }}
-                pt={{ base: '10', md: '32' }}
-                color='whiteAlpha.800'
-              >
-                <Text as='h3' fontSize='4xl'>
-                  {proj.title}
-                </Text>
-                <Text>
-                  {proj.description}
-                  <Link ml='4' color='blue.400' href={proj.url} target='_blank'>
-                    {proj.url}
-                  </Link>
-                </Text>
-                <Stack direction='row' mt='3'>
-                  {proj.tools.split(',').map((tool) => (
-                    <Badge key={tool}>{tool}</Badge>
-                  ))}
-                </Stack>
-              </Box>
+        <Box my='10'>
+          {props.homepage.projects.map((proj) => {
+            return (
+              <Box key={proj.title} backgroundImage={`url(${proj.bg.url})`}>
+                <Box
+                  maxW='xl'
+                  px={{ base: '10', md: '32' }}
+                  pt={{ base: '10', md: '32' }}
+                  color='whiteAlpha.800'
+                  my='-4'
+                >
+                  <Text as='h3' fontSize='4xl'>
+                    {proj.title}
+                  </Text>
+                  <Text>
+                    {proj.description}
+                    <Link
+                      ml='4'
+                      color='blue.400'
+                      href={proj.url}
+                      target='_blank'
+                    >
+                      {proj.url}
+                    </Link>
+                  </Text>
+                  <Stack direction='row' mt='3'>
+                    {proj.tools.split(',').map((tool) => (
+                      <Badge key={tool}>{tool}</Badge>
+                    ))}
+                  </Stack>
+                </Box>
 
-              <Box display='flex' justifyContent='end' p='4'>
-                <Image src={proj.image.url} alt={proj.image.name} />
+                <Box display='flex' justifyContent='end' p='4'>
+                  <Image src={proj.image.url} alt={proj.image.name} />
+                </Box>
               </Box>
-            </Box>
-          );
-        })}
+            );
+          })}
+        </Box>
       </section>
 
       {/* blog section */}
-
       <section>
         <Box>
           <Box backgroundColor='pink.300' px='5' pb='4'>
