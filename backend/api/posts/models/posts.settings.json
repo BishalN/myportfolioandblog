@@ -29,6 +29,11 @@
     },
     "writer": {
       "model": "writer"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

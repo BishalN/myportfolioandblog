@@ -6,7 +6,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
-    const res = await fetch("http://localhost:1337/graphql", {
+    const res = await fetch("http://localhost:4000/graphql", {
     method: "POST",
       body: JSON.stringify({ query, variables }),
     });
@@ -51,292 +51,82 @@ export type AdminUser = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type Article = {
-  __typename?: 'Article';
-  author?: Maybe<Writer>;
-  content: Scalars['String'];
-  created_at: Scalars['DateTime'];
-  description: Scalars['String'];
+export type ComponentSectionAbout = {
+  __typename?: 'ComponentSectionAbout';
+  blogs: Scalars['String'];
+  email: Scalars['String'];
   id: Scalars['ID'];
-  image?: Maybe<UploadFile>;
-  playlist?: Maybe<Category>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  slug: Scalars['String'];
-  title: Scalars['String'];
-  tools?: Maybe<Scalars['String']>;
-  updated_at: Scalars['DateTime'];
+  watch: Scalars['String'];
+  work: Scalars['String'];
 };
 
-export type ArticleAggregator = {
-  __typename?: 'ArticleAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+export type ComponentSectionAboutInput = {
+  blogs: Scalars['String'];
+  email: Scalars['String'];
+  watch: Scalars['String'];
+  work: Scalars['String'];
 };
 
-export type ArticleConnection = {
-  __typename?: 'ArticleConnection';
-  aggregate?: Maybe<ArticleAggregator>;
-  groupBy?: Maybe<ArticleGroupBy>;
-  values?: Maybe<Array<Maybe<Article>>>;
-};
-
-export type ArticleConnectionAuthor = {
-  __typename?: 'ArticleConnectionAuthor';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionContent = {
-  __typename?: 'ArticleConnectionContent';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionCreated_At = {
-  __typename?: 'ArticleConnectionCreated_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleConnectionDescription = {
-  __typename?: 'ArticleConnectionDescription';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionId = {
-  __typename?: 'ArticleConnectionId';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionImage = {
-  __typename?: 'ArticleConnectionImage';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionPlaylist = {
-  __typename?: 'ArticleConnectionPlaylist';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionPublished_At = {
-  __typename?: 'ArticleConnectionPublished_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleConnectionSlug = {
-  __typename?: 'ArticleConnectionSlug';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionTitle = {
-  __typename?: 'ArticleConnectionTitle';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionTools = {
-  __typename?: 'ArticleConnectionTools';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionUpdated_At = {
-  __typename?: 'ArticleConnectionUpdated_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleGroupBy = {
-  __typename?: 'ArticleGroupBy';
-  author?: Maybe<Array<Maybe<ArticleConnectionAuthor>>>;
-  content?: Maybe<Array<Maybe<ArticleConnectionContent>>>;
-  created_at?: Maybe<Array<Maybe<ArticleConnectionCreated_At>>>;
-  description?: Maybe<Array<Maybe<ArticleConnectionDescription>>>;
-  id?: Maybe<Array<Maybe<ArticleConnectionId>>>;
-  image?: Maybe<Array<Maybe<ArticleConnectionImage>>>;
-  playlist?: Maybe<Array<Maybe<ArticleConnectionPlaylist>>>;
-  published_at?: Maybe<Array<Maybe<ArticleConnectionPublished_At>>>;
-  slug?: Maybe<Array<Maybe<ArticleConnectionSlug>>>;
-  title?: Maybe<Array<Maybe<ArticleConnectionTitle>>>;
-  tools?: Maybe<Array<Maybe<ArticleConnectionTools>>>;
-  updated_at?: Maybe<Array<Maybe<ArticleConnectionUpdated_At>>>;
-};
-
-export type ArticleInput = {
-  author?: Maybe<Scalars['ID']>;
-  content: Scalars['String'];
-  created_by?: Maybe<Scalars['ID']>;
-  description: Scalars['String'];
-  image?: Maybe<Scalars['ID']>;
-  playlist?: Maybe<Scalars['ID']>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  slug: Scalars['String'];
-  title: Scalars['String'];
-  tools?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-};
-
-export type Category = {
-  __typename?: 'Category';
-  created_at: Scalars['DateTime'];
+export type ComponentSectionContact = {
+  __typename?: 'ComponentSectionContact';
+  email: Scalars['String'];
   id: Scalars['ID'];
-  name: Scalars['String'];
-  posts?: Maybe<Array<Maybe<Article>>>;
-  slug: Scalars['String'];
-  updated_at: Scalars['DateTime'];
+  insta: Scalars['String'];
+  linkedin: Scalars['String'];
+  title: Scalars['String'];
+  twitter: Scalars['String'];
+  youtube: Scalars['String'];
+};
+
+export type ComponentSectionContactInput = {
+  email: Scalars['String'];
+  insta: Scalars['String'];
+  linkedin: Scalars['String'];
+  title: Scalars['String'];
+  twitter: Scalars['String'];
+  youtube: Scalars['String'];
+};
+
+export type ComponentSectionHero = {
+  __typename?: 'ComponentSectionHero';
+  id: Scalars['ID'];
+  navlinks: Scalars['String'];
+  profile?: Maybe<Array<Maybe<UploadFile>>>;
+  title: Scalars['String'];
 };
 
 
-export type CategoryPostsArgs = {
+export type ComponentSectionHeroProfileArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type CategoryAggregator = {
-  __typename?: 'CategoryAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-export type CategoryConnection = {
-  __typename?: 'CategoryConnection';
-  aggregate?: Maybe<CategoryAggregator>;
-  groupBy?: Maybe<CategoryGroupBy>;
-  values?: Maybe<Array<Maybe<Category>>>;
-};
-
-export type CategoryConnectionCreated_At = {
-  __typename?: 'CategoryConnectionCreated_at';
-  connection?: Maybe<CategoryConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type CategoryConnectionId = {
-  __typename?: 'CategoryConnectionId';
-  connection?: Maybe<CategoryConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type CategoryConnectionName = {
-  __typename?: 'CategoryConnectionName';
-  connection?: Maybe<CategoryConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type CategoryConnectionSlug = {
-  __typename?: 'CategoryConnectionSlug';
-  connection?: Maybe<CategoryConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type CategoryConnectionUpdated_At = {
-  __typename?: 'CategoryConnectionUpdated_at';
-  connection?: Maybe<CategoryConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type CategoryGroupBy = {
-  __typename?: 'CategoryGroupBy';
-  created_at?: Maybe<Array<Maybe<CategoryConnectionCreated_At>>>;
-  id?: Maybe<Array<Maybe<CategoryConnectionId>>>;
-  name?: Maybe<Array<Maybe<CategoryConnectionName>>>;
-  slug?: Maybe<Array<Maybe<CategoryConnectionSlug>>>;
-  updated_at?: Maybe<Array<Maybe<CategoryConnectionUpdated_At>>>;
-};
-
-export type CategoryInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  name: Scalars['String'];
-  posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  slug: Scalars['String'];
-  updated_by?: Maybe<Scalars['ID']>;
-};
-
-export type ComponentSectionsAbout = {
-  __typename?: 'ComponentSectionsAbout';
-  blogs?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  watch?: Maybe<Scalars['String']>;
-  work?: Maybe<Scalars['String']>;
-};
-
-export type ComponentSectionsAboutInput = {
-  blogs?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  watch?: Maybe<Scalars['String']>;
-  work?: Maybe<Scalars['String']>;
-};
-
-export type ComponentSectionsContactInput = {
-  email?: Maybe<Scalars['String']>;
-  insta?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  twitter?: Maybe<Scalars['String']>;
-  youtube?: Maybe<Scalars['String']>;
-};
-
-export type ComponentSectionsContacts = {
-  __typename?: 'ComponentSectionsContacts';
-  email?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  insta?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  twitter?: Maybe<Scalars['String']>;
-  youtube?: Maybe<Scalars['String']>;
-};
-
-export type ComponentSectionsHero = {
-  __typename?: 'ComponentSectionsHero';
-  id: Scalars['ID'];
-  navlinks?: Maybe<Scalars['String']>;
-  profile?: Maybe<UploadFile>;
+export type ComponentSectionHeroInput = {
+  navlinks: Scalars['String'];
+  profile?: Maybe<Array<Maybe<Scalars['ID']>>>;
   title: Scalars['String'];
 };
 
-export type ComponentSectionsHeroInput = {
-  navlinks?: Maybe<Scalars['String']>;
-  profile?: Maybe<Scalars['ID']>;
+export type ComponentSectionProjectInput = {
+  bg?: Maybe<Scalars['ID']>;
+  description: Scalars['String'];
+  image?: Maybe<Scalars['ID']>;
   title: Scalars['String'];
+  tools: Scalars['String'];
+  url: Scalars['String'];
 };
 
-export type ComponentSectionsRecentPostInput = {
-  _?: Maybe<Scalars['String']>;
-};
-
-export type ComponentSectionsRecentPosts = {
-  __typename?: 'ComponentSectionsRecentPosts';
+export type ComponentSectionProjects = {
+  __typename?: 'ComponentSectionProjects';
+  bg?: Maybe<UploadFile>;
+  description: Scalars['String'];
   id: Scalars['ID'];
-};
-
-export type ComponentSectionsWorkInput = {
-  project?: Maybe<Scalars['JSON']>;
-};
-
-export type ComponentSectionsWorks = {
-  __typename?: 'ComponentSectionsWorks';
-  id: Scalars['ID'];
-  project?: Maybe<Scalars['JSON']>;
-};
-
-export type ComponentSharedSeo = {
-  __typename?: 'ComponentSharedSeo';
-  id: Scalars['ID'];
-  metaDescription: Scalars['String'];
-  metaTitle: Scalars['String'];
-};
-
-export type ComponentSharedSeoInput = {
-  metaDescription: Scalars['String'];
-  metaTitle: Scalars['String'];
+  image?: Maybe<UploadFile>;
+  title: Scalars['String'];
+  tools: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export type FileInfoInput = {
@@ -367,21 +157,23 @@ export type FileInput = {
 
 export type Homepage = {
   __typename?: 'Homepage';
-  Contacts?: Maybe<ComponentSectionsContacts>;
-  about?: Maybe<ComponentSectionsAbout>;
+  about?: Maybe<ComponentSectionAbout>;
+  contact?: Maybe<ComponentSectionContact>;
   created_at: Scalars['DateTime'];
-  hero?: Maybe<ComponentSectionsHero>;
+  hero?: Maybe<ComponentSectionHero>;
   id: Scalars['ID'];
-  seo?: Maybe<ComponentSharedSeo>;
+  projects?: Maybe<Array<Maybe<ComponentSectionProjects>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
   updated_at: Scalars['DateTime'];
 };
 
 export type HomepageInput = {
-  Contacts?: Maybe<ComponentSectionsContactInput>;
-  about?: Maybe<ComponentSectionsAboutInput>;
+  about?: Maybe<ComponentSectionAboutInput>;
+  contact?: Maybe<ComponentSectionContactInput>;
   created_by?: Maybe<Scalars['ID']>;
-  hero: ComponentSectionsHeroInput;
-  seo?: Maybe<ComponentSharedSeoInput>;
+  hero?: Maybe<ComponentSectionHeroInput>;
+  projects?: Maybe<Array<Maybe<ComponentSectionProjectInput>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
@@ -405,24 +197,22 @@ export type LocaleInput = {
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type Morph = Article | ArticleAggregator | ArticleConnection | ArticleConnectionAuthor | ArticleConnectionContent | ArticleConnectionCreated_At | ArticleConnectionDescription | ArticleConnectionId | ArticleConnectionImage | ArticleConnectionPlaylist | ArticleConnectionPublished_At | ArticleConnectionSlug | ArticleConnectionTitle | ArticleConnectionTools | ArticleConnectionUpdated_At | ArticleGroupBy | Category | CategoryAggregator | CategoryConnection | CategoryConnectionCreated_At | CategoryConnectionId | CategoryConnectionName | CategoryConnectionSlug | CategoryConnectionUpdated_At | CategoryGroupBy | ComponentSectionsAbout | ComponentSectionsContacts | ComponentSectionsHero | ComponentSectionsRecentPosts | ComponentSectionsWorks | ComponentSharedSeo | Homepage | I18NLocale | Projects | ProjectsAggregator | ProjectsConnection | ProjectsConnectionCreated_At | ProjectsConnectionDescription | ProjectsConnectionId | ProjectsConnectionPublished_At | ProjectsConnectionTitle | ProjectsConnectionTools | ProjectsConnectionUpdated_At | ProjectsConnectionUrl | ProjectsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | Writer | WriterAggregator | WriterConnection | WriterConnectionBio | WriterConnectionCreated_At | WriterConnectionEmail | WriterConnectionId | WriterConnectionName | WriterConnectionPicture | WriterConnectionUpdated_At | WriterGroupBy | CreateArticlePayload | CreateCategoryPayload | CreateProjectPayload | CreateRolePayload | CreateUserPayload | CreateWriterPayload | DeleteArticlePayload | DeleteCategoryPayload | DeleteFilePayload | DeleteHomepagePayload | DeleteProjectPayload | DeleteRolePayload | DeleteUserPayload | DeleteWriterPayload | UpdateArticlePayload | UpdateCategoryPayload | UpdateHomepagePayload | UpdateProjectPayload | UpdateRolePayload | UpdateUserPayload | UpdateWriterPayload;
+export type Morph = ComponentSectionAbout | ComponentSectionContact | ComponentSectionHero | ComponentSectionProjects | Homepage | I18NLocale | Playlist | PlaylistAggregator | PlaylistConnection | PlaylistConnectionCreated_At | PlaylistConnectionDescription | PlaylistConnectionId | PlaylistConnectionPosts | PlaylistConnectionPublished_At | PlaylistConnectionTitle | PlaylistConnectionUpdated_At | PlaylistGroupBy | Posts | PostsAggregator | PostsConnection | PostsConnectionCreated_At | PostsConnectionDescription | PostsConnectionId | PostsConnectionPublished_At | PostsConnectionTitle | PostsConnectionTopics | PostsConnectionUpdated_At | PostsConnectionWriter | PostsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | Writer | WriterAggregator | WriterConnection | WriterConnectionAvatar | WriterConnectionBio | WriterConnectionCreated_At | WriterConnectionId | WriterConnectionName | WriterConnectionPublished_At | WriterConnectionUpdated_At | WriterGroupBy | CreatePlaylistPayload | CreatePostPayload | CreateRolePayload | CreateUserPayload | CreateWriterPayload | DeleteFilePayload | DeleteHomepagePayload | DeletePlaylistPayload | DeletePostPayload | DeleteRolePayload | DeleteUserPayload | DeleteWriterPayload | UpdateHomepagePayload | UpdatePlaylistPayload | UpdatePostPayload | UpdateRolePayload | UpdateUserPayload | UpdateWriterPayload;
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createArticle?: Maybe<CreateArticlePayload>;
-  createCategory?: Maybe<CreateCategoryPayload>;
-  createProject?: Maybe<CreateProjectPayload>;
+  createPlaylist?: Maybe<CreatePlaylistPayload>;
+  createPost?: Maybe<CreatePostPayload>;
   /** Create a new role */
   createRole?: Maybe<CreateRolePayload>;
   /** Create a new user */
   createUser?: Maybe<CreateUserPayload>;
   createWriter?: Maybe<CreateWriterPayload>;
-  deleteArticle?: Maybe<DeleteArticlePayload>;
-  deleteCategory?: Maybe<DeleteCategoryPayload>;
   /** Delete one file */
   deleteFile?: Maybe<DeleteFilePayload>;
   deleteHomepage?: Maybe<DeleteHomepagePayload>;
-  deleteProject?: Maybe<DeleteProjectPayload>;
+  deletePlaylist?: Maybe<DeletePlaylistPayload>;
+  deletePost?: Maybe<DeletePostPayload>;
   /** Delete an existing role */
   deleteRole?: Maybe<DeleteRolePayload>;
   /** Delete an existing user */
@@ -434,11 +224,10 @@ export type Mutation = {
   multipleUpload: Array<Maybe<UploadFile>>;
   register: UsersPermissionsLoginPayload;
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
-  updateArticle?: Maybe<UpdateArticlePayload>;
-  updateCategory?: Maybe<UpdateCategoryPayload>;
   updateFileInfo: UploadFile;
   updateHomepage?: Maybe<UpdateHomepagePayload>;
-  updateProject?: Maybe<UpdateProjectPayload>;
+  updatePlaylist?: Maybe<UpdatePlaylistPayload>;
+  updatePost?: Maybe<UpdatePostPayload>;
   /** Update an existing role */
   updateRole?: Maybe<UpdateRolePayload>;
   /** Update an existing user */
@@ -448,18 +237,13 @@ export type Mutation = {
 };
 
 
-export type MutationCreateArticleArgs = {
-  input?: Maybe<CreateArticleInput>;
+export type MutationCreatePlaylistArgs = {
+  input?: Maybe<CreatePlaylistInput>;
 };
 
 
-export type MutationCreateCategoryArgs = {
-  input?: Maybe<CreateCategoryInput>;
-};
-
-
-export type MutationCreateProjectArgs = {
-  input?: Maybe<CreateProjectInput>;
+export type MutationCreatePostArgs = {
+  input?: Maybe<CreatePostInput>;
 };
 
 
@@ -478,23 +262,18 @@ export type MutationCreateWriterArgs = {
 };
 
 
-export type MutationDeleteArticleArgs = {
-  input?: Maybe<DeleteArticleInput>;
-};
-
-
-export type MutationDeleteCategoryArgs = {
-  input?: Maybe<DeleteCategoryInput>;
-};
-
-
 export type MutationDeleteFileArgs = {
   input?: Maybe<DeleteFileInput>;
 };
 
 
-export type MutationDeleteProjectArgs = {
-  input?: Maybe<DeleteProjectInput>;
+export type MutationDeletePlaylistArgs = {
+  input?: Maybe<DeletePlaylistInput>;
+};
+
+
+export type MutationDeletePostArgs = {
+  input?: Maybe<DeletePostInput>;
 };
 
 
@@ -549,16 +328,6 @@ export type MutationResetPasswordArgs = {
 };
 
 
-export type MutationUpdateArticleArgs = {
-  input?: Maybe<UpdateArticleInput>;
-};
-
-
-export type MutationUpdateCategoryArgs = {
-  input?: Maybe<UpdateCategoryInput>;
-};
-
-
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
   info: FileInfoInput;
@@ -570,8 +339,13 @@ export type MutationUpdateHomepageArgs = {
 };
 
 
-export type MutationUpdateProjectArgs = {
-  input?: Maybe<UpdateProjectInput>;
+export type MutationUpdatePlaylistArgs = {
+  input?: Maybe<UpdatePlaylistInput>;
+};
+
+
+export type MutationUpdatePostArgs = {
+  input?: Maybe<UpdatePostInput>;
 };
 
 
@@ -599,109 +373,195 @@ export type MutationUploadArgs = {
   source?: Maybe<Scalars['String']>;
 };
 
-export type ProjectInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  image?: Maybe<Array<Maybe<Scalars['ID']>>>;
+export type Playlist = {
+  __typename?: 'Playlist';
+  created_at: Scalars['DateTime'];
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  posts?: Maybe<Posts>;
   published_at?: Maybe<Scalars['DateTime']>;
-  title?: Maybe<Scalars['String']>;
-  tools?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-  url?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  updated_at: Scalars['DateTime'];
 };
 
-export type Projects = {
-  __typename?: 'Projects';
+export type PlaylistAggregator = {
+  __typename?: 'PlaylistAggregator';
+  count?: Maybe<Scalars['Int']>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type PlaylistConnection = {
+  __typename?: 'PlaylistConnection';
+  aggregate?: Maybe<PlaylistAggregator>;
+  groupBy?: Maybe<PlaylistGroupBy>;
+  values?: Maybe<Array<Maybe<Playlist>>>;
+};
+
+export type PlaylistConnectionCreated_At = {
+  __typename?: 'PlaylistConnectionCreated_at';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type PlaylistConnectionDescription = {
+  __typename?: 'PlaylistConnectionDescription';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type PlaylistConnectionId = {
+  __typename?: 'PlaylistConnectionId';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
+export type PlaylistConnectionPosts = {
+  __typename?: 'PlaylistConnectionPosts';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
+export type PlaylistConnectionPublished_At = {
+  __typename?: 'PlaylistConnectionPublished_at';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type PlaylistConnectionTitle = {
+  __typename?: 'PlaylistConnectionTitle';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['String']>;
+};
+
+export type PlaylistConnectionUpdated_At = {
+  __typename?: 'PlaylistConnectionUpdated_at';
+  connection?: Maybe<PlaylistConnection>;
+  key?: Maybe<Scalars['DateTime']>;
+};
+
+export type PlaylistGroupBy = {
+  __typename?: 'PlaylistGroupBy';
+  created_at?: Maybe<Array<Maybe<PlaylistConnectionCreated_At>>>;
+  description?: Maybe<Array<Maybe<PlaylistConnectionDescription>>>;
+  id?: Maybe<Array<Maybe<PlaylistConnectionId>>>;
+  posts?: Maybe<Array<Maybe<PlaylistConnectionPosts>>>;
+  published_at?: Maybe<Array<Maybe<PlaylistConnectionPublished_At>>>;
+  title?: Maybe<Array<Maybe<PlaylistConnectionTitle>>>;
+  updated_at?: Maybe<Array<Maybe<PlaylistConnectionUpdated_At>>>;
+};
+
+export type PlaylistInput = {
+  created_by?: Maybe<Scalars['ID']>;
+  description: Scalars['String'];
+  posts?: Maybe<Scalars['ID']>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  title: Scalars['String'];
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type PostInput = {
+  created_by?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
+  playlists?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  title: Scalars['String'];
+  topics: Scalars['String'];
+  updated_by?: Maybe<Scalars['ID']>;
+  writer?: Maybe<Scalars['ID']>;
+};
+
+export type Posts = {
+  __typename?: 'Posts';
   created_at: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  image?: Maybe<Array<Maybe<UploadFile>>>;
+  playlists?: Maybe<Array<Maybe<Playlist>>>;
   published_at?: Maybe<Scalars['DateTime']>;
-  title?: Maybe<Scalars['String']>;
-  tools?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  topics: Scalars['String'];
   updated_at: Scalars['DateTime'];
-  url?: Maybe<Scalars['String']>;
+  writer?: Maybe<Writer>;
 };
 
 
-export type ProjectsImageArgs = {
+export type PostsPlaylistsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type ProjectsAggregator = {
-  __typename?: 'ProjectsAggregator';
+export type PostsAggregator = {
+  __typename?: 'PostsAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type ProjectsConnection = {
-  __typename?: 'ProjectsConnection';
-  aggregate?: Maybe<ProjectsAggregator>;
-  groupBy?: Maybe<ProjectsGroupBy>;
-  values?: Maybe<Array<Maybe<Projects>>>;
+export type PostsConnection = {
+  __typename?: 'PostsConnection';
+  aggregate?: Maybe<PostsAggregator>;
+  groupBy?: Maybe<PostsGroupBy>;
+  values?: Maybe<Array<Maybe<Posts>>>;
 };
 
-export type ProjectsConnectionCreated_At = {
-  __typename?: 'ProjectsConnectionCreated_at';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionCreated_At = {
+  __typename?: 'PostsConnectionCreated_at';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsConnectionDescription = {
-  __typename?: 'ProjectsConnectionDescription';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionDescription = {
+  __typename?: 'PostsConnectionDescription';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type ProjectsConnectionId = {
-  __typename?: 'ProjectsConnectionId';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionId = {
+  __typename?: 'PostsConnectionId';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsConnectionPublished_At = {
-  __typename?: 'ProjectsConnectionPublished_at';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionPublished_At = {
+  __typename?: 'PostsConnectionPublished_at';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsConnectionTitle = {
-  __typename?: 'ProjectsConnectionTitle';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionTitle = {
+  __typename?: 'PostsConnectionTitle';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type ProjectsConnectionTools = {
-  __typename?: 'ProjectsConnectionTools';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionTopics = {
+  __typename?: 'PostsConnectionTopics';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['String']>;
 };
 
-export type ProjectsConnectionUpdated_At = {
-  __typename?: 'ProjectsConnectionUpdated_at';
-  connection?: Maybe<ProjectsConnection>;
+export type PostsConnectionUpdated_At = {
+  __typename?: 'PostsConnectionUpdated_at';
+  connection?: Maybe<PostsConnection>;
   key?: Maybe<Scalars['DateTime']>;
 };
 
-export type ProjectsConnectionUrl = {
-  __typename?: 'ProjectsConnectionUrl';
-  connection?: Maybe<ProjectsConnection>;
-  key?: Maybe<Scalars['String']>;
+export type PostsConnectionWriter = {
+  __typename?: 'PostsConnectionWriter';
+  connection?: Maybe<PostsConnection>;
+  key?: Maybe<Scalars['ID']>;
 };
 
-export type ProjectsGroupBy = {
-  __typename?: 'ProjectsGroupBy';
-  created_at?: Maybe<Array<Maybe<ProjectsConnectionCreated_At>>>;
-  description?: Maybe<Array<Maybe<ProjectsConnectionDescription>>>;
-  id?: Maybe<Array<Maybe<ProjectsConnectionId>>>;
-  published_at?: Maybe<Array<Maybe<ProjectsConnectionPublished_At>>>;
-  title?: Maybe<Array<Maybe<ProjectsConnectionTitle>>>;
-  tools?: Maybe<Array<Maybe<ProjectsConnectionTools>>>;
-  updated_at?: Maybe<Array<Maybe<ProjectsConnectionUpdated_At>>>;
-  url?: Maybe<Array<Maybe<ProjectsConnectionUrl>>>;
+export type PostsGroupBy = {
+  __typename?: 'PostsGroupBy';
+  created_at?: Maybe<Array<Maybe<PostsConnectionCreated_At>>>;
+  description?: Maybe<Array<Maybe<PostsConnectionDescription>>>;
+  id?: Maybe<Array<Maybe<PostsConnectionId>>>;
+  published_at?: Maybe<Array<Maybe<PostsConnectionPublished_At>>>;
+  title?: Maybe<Array<Maybe<PostsConnectionTitle>>>;
+  topics?: Maybe<Array<Maybe<PostsConnectionTopics>>>;
+  updated_at?: Maybe<Array<Maybe<PostsConnectionUpdated_At>>>;
+  writer?: Maybe<Array<Maybe<PostsConnectionWriter>>>;
 };
 
 export enum PublicationState {
@@ -711,19 +571,16 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: 'Query';
-  article?: Maybe<Article>;
-  articles?: Maybe<Array<Maybe<Article>>>;
-  articlesConnection?: Maybe<ArticleConnection>;
-  categories?: Maybe<Array<Maybe<Category>>>;
-  categoriesConnection?: Maybe<CategoryConnection>;
-  category?: Maybe<Category>;
   files?: Maybe<Array<Maybe<UploadFile>>>;
   filesConnection?: Maybe<UploadFileConnection>;
   homepage?: Maybe<Homepage>;
   me?: Maybe<UsersPermissionsMe>;
-  project?: Maybe<Projects>;
-  projects?: Maybe<Array<Maybe<Projects>>>;
-  projectsConnection?: Maybe<ProjectsConnection>;
+  playlist?: Maybe<Playlist>;
+  playlists?: Maybe<Array<Maybe<Playlist>>>;
+  playlistsConnection?: Maybe<PlaylistConnection>;
+  post?: Maybe<Posts>;
+  posts?: Maybe<Array<Maybe<Posts>>>;
+  postsConnection?: Maybe<PostsConnection>;
   role?: Maybe<UsersPermissionsRole>;
   /** Retrieve all the existing roles. You can't apply filters on this query. */
   roles?: Maybe<Array<Maybe<UsersPermissionsRole>>>;
@@ -734,52 +591,6 @@ export type Query = {
   writer?: Maybe<Writer>;
   writers?: Maybe<Array<Maybe<Writer>>>;
   writersConnection?: Maybe<WriterConnection>;
-};
-
-
-export type QueryArticleArgs = {
-  id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
-};
-
-
-export type QueryArticlesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type QueryArticlesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type QueryCategoriesArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  publicationState?: Maybe<PublicationState>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type QueryCategoriesConnectionArgs = {
-  limit?: Maybe<Scalars['Int']>;
-  sort?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type QueryCategoryArgs = {
-  id: Scalars['ID'];
-  publicationState?: Maybe<PublicationState>;
 };
 
 
@@ -805,13 +616,13 @@ export type QueryHomepageArgs = {
 };
 
 
-export type QueryProjectArgs = {
+export type QueryPlaylistArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
 
 
-export type QueryProjectsArgs = {
+export type QueryPlaylistsArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
   sort?: Maybe<Scalars['String']>;
@@ -820,7 +631,30 @@ export type QueryProjectsArgs = {
 };
 
 
-export type QueryProjectsConnectionArgs = {
+export type QueryPlaylistsConnectionArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type QueryPostArgs = {
+  id: Scalars['ID'];
+  publicationState?: Maybe<PublicationState>;
+};
+
+
+export type QueryPostsArgs = {
+  limit?: Maybe<Scalars['Int']>;
+  publicationState?: Maybe<PublicationState>;
+  sort?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+
+export type QueryPostsConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
@@ -1336,13 +1170,13 @@ export type UsersPermissionsUserGroupBy = {
 
 export type Writer = {
   __typename?: 'Writer';
-  bio?: Maybe<Scalars['String']>;
+  avatar?: Maybe<UploadFile>;
+  bio: Scalars['String'];
   created_at: Scalars['DateTime'];
-  email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  picture?: Maybe<UploadFile>;
-  posts?: Maybe<Array<Maybe<Article>>>;
+  name: Scalars['String'];
+  posts?: Maybe<Array<Maybe<Posts>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
   updated_at: Scalars['DateTime'];
 };
 
@@ -1367,6 +1201,12 @@ export type WriterConnection = {
   values?: Maybe<Array<Maybe<Writer>>>;
 };
 
+export type WriterConnectionAvatar = {
+  __typename?: 'WriterConnectionAvatar';
+  connection?: Maybe<WriterConnection>;
+  key?: Maybe<Scalars['ID']>;
+};
+
 export type WriterConnectionBio = {
   __typename?: 'WriterConnectionBio';
   connection?: Maybe<WriterConnection>;
@@ -1377,12 +1217,6 @@ export type WriterConnectionCreated_At = {
   __typename?: 'WriterConnectionCreated_at';
   connection?: Maybe<WriterConnection>;
   key?: Maybe<Scalars['DateTime']>;
-};
-
-export type WriterConnectionEmail = {
-  __typename?: 'WriterConnectionEmail';
-  connection?: Maybe<WriterConnection>;
-  key?: Maybe<Scalars['String']>;
 };
 
 export type WriterConnectionId = {
@@ -1397,10 +1231,10 @@ export type WriterConnectionName = {
   key?: Maybe<Scalars['String']>;
 };
 
-export type WriterConnectionPicture = {
-  __typename?: 'WriterConnectionPicture';
+export type WriterConnectionPublished_At = {
+  __typename?: 'WriterConnectionPublished_at';
   connection?: Maybe<WriterConnection>;
-  key?: Maybe<Scalars['ID']>;
+  key?: Maybe<Scalars['DateTime']>;
 };
 
 export type WriterConnectionUpdated_At = {
@@ -1411,50 +1245,41 @@ export type WriterConnectionUpdated_At = {
 
 export type WriterGroupBy = {
   __typename?: 'WriterGroupBy';
+  avatar?: Maybe<Array<Maybe<WriterConnectionAvatar>>>;
   bio?: Maybe<Array<Maybe<WriterConnectionBio>>>;
   created_at?: Maybe<Array<Maybe<WriterConnectionCreated_At>>>;
-  email?: Maybe<Array<Maybe<WriterConnectionEmail>>>;
   id?: Maybe<Array<Maybe<WriterConnectionId>>>;
   name?: Maybe<Array<Maybe<WriterConnectionName>>>;
-  picture?: Maybe<Array<Maybe<WriterConnectionPicture>>>;
+  published_at?: Maybe<Array<Maybe<WriterConnectionPublished_At>>>;
   updated_at?: Maybe<Array<Maybe<WriterConnectionUpdated_At>>>;
 };
 
 export type WriterInput = {
-  bio?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['ID']>;
+  bio: Scalars['String'];
   created_by?: Maybe<Scalars['ID']>;
-  email?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  picture?: Maybe<Scalars['ID']>;
+  name: Scalars['String'];
   posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type CreateArticleInput = {
-  data?: Maybe<ArticleInput>;
+export type CreatePlaylistInput = {
+  data?: Maybe<PlaylistInput>;
 };
 
-export type CreateArticlePayload = {
-  __typename?: 'createArticlePayload';
-  article?: Maybe<Article>;
+export type CreatePlaylistPayload = {
+  __typename?: 'createPlaylistPayload';
+  playlist?: Maybe<Playlist>;
 };
 
-export type CreateCategoryInput = {
-  data?: Maybe<CategoryInput>;
+export type CreatePostInput = {
+  data?: Maybe<PostInput>;
 };
 
-export type CreateCategoryPayload = {
-  __typename?: 'createCategoryPayload';
-  category?: Maybe<Category>;
-};
-
-export type CreateProjectInput = {
-  data?: Maybe<ProjectInput>;
-};
-
-export type CreateProjectPayload = {
-  __typename?: 'createProjectPayload';
-  project?: Maybe<Projects>;
+export type CreatePostPayload = {
+  __typename?: 'createPostPayload';
+  post?: Maybe<Posts>;
 };
 
 export type CreateRoleInput = {
@@ -1484,24 +1309,6 @@ export type CreateWriterPayload = {
   writer?: Maybe<Writer>;
 };
 
-export type DeleteArticleInput = {
-  where?: Maybe<InputId>;
-};
-
-export type DeleteArticlePayload = {
-  __typename?: 'deleteArticlePayload';
-  article?: Maybe<Article>;
-};
-
-export type DeleteCategoryInput = {
-  where?: Maybe<InputId>;
-};
-
-export type DeleteCategoryPayload = {
-  __typename?: 'deleteCategoryPayload';
-  category?: Maybe<Category>;
-};
-
 export type DeleteFileInput = {
   where?: Maybe<InputId>;
 };
@@ -1516,13 +1323,22 @@ export type DeleteHomepagePayload = {
   homepage?: Maybe<Homepage>;
 };
 
-export type DeleteProjectInput = {
+export type DeletePlaylistInput = {
   where?: Maybe<InputId>;
 };
 
-export type DeleteProjectPayload = {
-  __typename?: 'deleteProjectPayload';
-  project?: Maybe<Projects>;
+export type DeletePlaylistPayload = {
+  __typename?: 'deletePlaylistPayload';
+  playlist?: Maybe<Playlist>;
+};
+
+export type DeletePostInput = {
+  where?: Maybe<InputId>;
+};
+
+export type DeletePostPayload = {
+  __typename?: 'deletePostPayload';
+  post?: Maybe<Posts>;
 };
 
 export type DeleteRoleInput = {
@@ -1552,29 +1368,7 @@ export type DeleteWriterPayload = {
   writer?: Maybe<Writer>;
 };
 
-export type EditArticleInput = {
-  author?: Maybe<Scalars['ID']>;
-  content?: Maybe<Scalars['String']>;
-  created_by?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  image?: Maybe<Scalars['ID']>;
-  playlist?: Maybe<Scalars['ID']>;
-  published_at?: Maybe<Scalars['DateTime']>;
-  slug?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  tools?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-};
-
-export type EditCategoryInput = {
-  created_by?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  slug?: Maybe<Scalars['String']>;
-  updated_by?: Maybe<Scalars['ID']>;
-};
-
-export type EditComponentSectionsAboutInput = {
+export type EditComponentSectionAboutInput = {
   blogs?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
@@ -1582,35 +1376,31 @@ export type EditComponentSectionsAboutInput = {
   work?: Maybe<Scalars['String']>;
 };
 
-export type EditComponentSectionsContactInput = {
+export type EditComponentSectionContactInput = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   insta?: Maybe<Scalars['String']>;
+  linkedin?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   twitter?: Maybe<Scalars['String']>;
   youtube?: Maybe<Scalars['String']>;
 };
 
-export type EditComponentSectionsHeroInput = {
+export type EditComponentSectionHeroInput = {
   id?: Maybe<Scalars['ID']>;
   navlinks?: Maybe<Scalars['String']>;
-  profile?: Maybe<Scalars['ID']>;
+  profile?: Maybe<Array<Maybe<Scalars['ID']>>>;
   title?: Maybe<Scalars['String']>;
 };
 
-export type EditComponentSectionsRecentPostInput = {
+export type EditComponentSectionProjectInput = {
+  bg?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
-};
-
-export type EditComponentSectionsWorkInput = {
-  id?: Maybe<Scalars['ID']>;
-  project?: Maybe<Scalars['JSON']>;
-};
-
-export type EditComponentSharedSeoInput = {
-  id?: Maybe<Scalars['ID']>;
-  metaDescription?: Maybe<Scalars['String']>;
-  metaTitle?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+  tools?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 export type EditFileInput = {
@@ -1634,11 +1424,12 @@ export type EditFileInput = {
 };
 
 export type EditHomepageInput = {
-  Contacts?: Maybe<EditComponentSectionsContactInput>;
-  about?: Maybe<EditComponentSectionsAboutInput>;
+  about?: Maybe<EditComponentSectionAboutInput>;
+  contact?: Maybe<EditComponentSectionContactInput>;
   created_by?: Maybe<Scalars['ID']>;
-  hero?: Maybe<EditComponentSectionsHeroInput>;
-  seo?: Maybe<EditComponentSharedSeoInput>;
+  hero?: Maybe<EditComponentSectionHeroInput>;
+  projects?: Maybe<Array<Maybe<EditComponentSectionProjectInput>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
 
@@ -1649,15 +1440,24 @@ export type EditLocaleInput = {
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type EditProjectInput = {
+export type EditPlaylistInput = {
   created_by?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
-  image?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  posts?: Maybe<Scalars['ID']>;
   published_at?: Maybe<Scalars['DateTime']>;
   title?: Maybe<Scalars['String']>;
-  tools?: Maybe<Scalars['String']>;
   updated_by?: Maybe<Scalars['ID']>;
-  url?: Maybe<Scalars['String']>;
+};
+
+export type EditPostInput = {
+  created_by?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
+  playlists?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  title?: Maybe<Scalars['String']>;
+  topics?: Maybe<Scalars['String']>;
+  updated_by?: Maybe<Scalars['ID']>;
+  writer?: Maybe<Scalars['ID']>;
 };
 
 export type EditRoleInput = {
@@ -1685,33 +1485,13 @@ export type EditUserInput = {
 };
 
 export type EditWriterInput = {
+  avatar?: Maybe<Scalars['ID']>;
   bio?: Maybe<Scalars['String']>;
   created_by?: Maybe<Scalars['ID']>;
-  email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  picture?: Maybe<Scalars['ID']>;
   posts?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
   updated_by?: Maybe<Scalars['ID']>;
-};
-
-export type UpdateArticleInput = {
-  data?: Maybe<EditArticleInput>;
-  where?: Maybe<InputId>;
-};
-
-export type UpdateArticlePayload = {
-  __typename?: 'updateArticlePayload';
-  article?: Maybe<Article>;
-};
-
-export type UpdateCategoryInput = {
-  data?: Maybe<EditCategoryInput>;
-  where?: Maybe<InputId>;
-};
-
-export type UpdateCategoryPayload = {
-  __typename?: 'updateCategoryPayload';
-  category?: Maybe<Category>;
 };
 
 export type UpdateHomepageInput = {
@@ -1723,14 +1503,24 @@ export type UpdateHomepagePayload = {
   homepage?: Maybe<Homepage>;
 };
 
-export type UpdateProjectInput = {
-  data?: Maybe<EditProjectInput>;
+export type UpdatePlaylistInput = {
+  data?: Maybe<EditPlaylistInput>;
   where?: Maybe<InputId>;
 };
 
-export type UpdateProjectPayload = {
-  __typename?: 'updateProjectPayload';
-  project?: Maybe<Projects>;
+export type UpdatePlaylistPayload = {
+  __typename?: 'updatePlaylistPayload';
+  playlist?: Maybe<Playlist>;
+};
+
+export type UpdatePostInput = {
+  data?: Maybe<EditPostInput>;
+  where?: Maybe<InputId>;
+};
+
+export type UpdatePostPayload = {
+  __typename?: 'updatePostPayload';
+  post?: Maybe<Posts>;
 };
 
 export type UpdateRoleInput = {
@@ -1763,29 +1553,22 @@ export type UpdateWriterPayload = {
   writer?: Maybe<Writer>;
 };
 
-export type LandingPageQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LandingPageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', seo?: { __typename?: 'ComponentSharedSeo', metaTitle: string, metaDescription: string } | null | undefined, hero?: { __typename?: 'ComponentSectionsHero', title: string, navlinks?: string | null | undefined, profile?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null | undefined, caption?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined, formats?: any | null | undefined, url: string } | null | undefined } | null | undefined, about?: { __typename?: 'ComponentSectionsAbout', work?: string | null | undefined, blogs?: string | null | undefined, watch?: string | null | undefined, email?: string | null | undefined } | null | undefined, Contacts?: { __typename?: 'ComponentSectionsContacts', title?: string | null | undefined, email?: string | null | undefined, insta?: string | null | undefined, twitter?: string | null | undefined, youtube?: string | null | undefined } | null | undefined } | null | undefined, articles?: Array<{ __typename?: 'Article', updated_at: any, created_at: any, title: string, description: string, content: string, tools?: string | null | undefined, slug: string, playlist?: { __typename?: 'Category', name: string } | null | undefined } | null | undefined> | null | undefined, projects?: Array<{ __typename?: 'Projects', title?: string | null | undefined, description?: string | null | undefined, tools?: string | null | undefined, url?: string | null | undefined, image?: Array<{ __typename?: 'UploadFile', name: string, alternativeText?: string | null | undefined, caption?: string | null | undefined, width?: number | null | undefined, height?: number | null | undefined, formats?: any | null | undefined, size: number, url: string } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+export type HomePageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', hero?: { __typename?: 'ComponentSectionHero', title: string, navlinks: string, profile?: Array<{ __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined> | null | undefined } | null | undefined, about?: { __typename?: 'ComponentSectionAbout', work: string, blogs: string, watch: string, email: string } | null | undefined, projects?: Array<{ __typename?: 'ComponentSectionProjects', title: string, description: string, tools: string, url: string, bg?: { __typename?: 'UploadFile', url: string } | null | undefined, image?: { __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined } | null | undefined> | null | undefined, contact?: { __typename?: 'ComponentSectionContact', email: string, insta: string, youtube: string, twitter: string, linkedin: string, title: string } | null | undefined } | null | undefined, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined } | null | undefined> | null | undefined };
 
 
-export const LandingPageDocument = `
-    query LandingPage {
+export const HomePageDocument = `
+    query HomePage {
   homepage {
-    seo {
-      metaTitle
-      metaDescription
-    }
     hero {
       title
       navlinks
       profile {
         name
-        alternativeText
-        caption
         width
         height
-        formats
         url
       }
     }
@@ -1795,53 +1578,46 @@ export const LandingPageDocument = `
       watch
       email
     }
-    Contacts {
+    projects {
       title
+      description
+      tools
+      url
+      bg {
+        url
+      }
+      image {
+        name
+        width
+        height
+        url
+      }
+    }
+    contact {
       email
       insta
-      twitter
       youtube
+      twitter
+      linkedin
+      title
     }
   }
-  articles(sort: "created_at:desc", limit: 3) {
-    updated_at
-    created_at
+  posts(sort: "created_at:desc", limit: 3) {
     title
+    topics
     description
-    content
-    tools
-    slug
-    playlist {
-      name
-    }
-  }
-  projects {
-    title
-    description
-    tools
-    url
-    image {
-      name
-      alternativeText
-      caption
-      width
-      height
-      formats
-      size
-      url
-    }
   }
 }
     `;
-export const useLandingPageQuery = <
-      TData = LandingPageQuery,
+export const useHomePageQuery = <
+      TData = HomePageQuery,
       TError = unknown
     >(
-      variables?: LandingPageQueryVariables,
-      options?: UseQueryOptions<LandingPageQuery, TError, TData>
+      variables?: HomePageQueryVariables,
+      options?: UseQueryOptions<HomePageQuery, TError, TData>
     ) =>
-    useQuery<LandingPageQuery, TError, TData>(
-      variables === undefined ? ['LandingPage'] : ['LandingPage', variables],
-      fetcher<LandingPageQuery, LandingPageQueryVariables>(LandingPageDocument, variables),
+    useQuery<HomePageQuery, TError, TData>(
+      variables === undefined ? ['HomePage'] : ['HomePage', variables],
+      fetcher<HomePageQuery, HomePageQueryVariables>(HomePageDocument, variables),
       options
     );

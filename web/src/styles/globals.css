@@ -12,17 +12,15 @@ body {
   width: 100vw;
 }
 
-/* .heroImage {
-  position:'absolute';
-              bottom:0;
-              borderBottomRightRadius:'2xl';
-              right:'0';
-              boxSize:{{ base: '400', md: '400', lg: '500', xl: '500' }};
-              mt:'16';
-              objectFit:'cover';
-              alignSelf:'flex-end';
-              justifySelf:'self-end';
-} */
+.heroImage {
+  position: 'absolute';
+  bottom: 0;
+  right: 0;
+  margin-top: 16rem;
+  object-fit: cover;
+  align-self: flex-end;
+  justify-self: flex-end;
+}
 
 a {
   color: inherit;

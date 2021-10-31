@@ -2,7 +2,8 @@
   "collectionName": "components_section_contacts",
   "info": {
     "name": "contact",
-    "icon": "address-book"
+    "icon": "address-book",
+    "description": ""
   },
   "options": {},
   "attributes": {

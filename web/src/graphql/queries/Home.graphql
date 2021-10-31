@@ -1,0 +1,48 @@
+query HomePage {
+  homepage {
+    hero {
+      title
+      navlinks
+      profile {
+        name
+        width
+        height
+        url
+      }
+    }
+    about {
+      work
+      blogs
+      watch
+      email
+    }
+    projects {
+      title
+      description
+      tools
+      url
+      bg {
+        url
+      }
+      image {
+        name
+        width
+        height
+        url
+      }
+    }
+    contact {
+      email
+      insta
+      youtube
+      twitter
+      linkedin
+      title
+    }
+  }
+  posts(sort: "created_at:desc", limit: 3) {
+    title
+    topics
+    description
+  }
+}
