@@ -12,6 +12,7 @@ query Blog($slug: String!) {
       name
       bio
       avatar {
+        formats
         url
       }
     }
@@ -19,6 +20,7 @@ query Blog($slug: String!) {
       title
       slug
       posts {
+        updated_at
         title
         topics
         description

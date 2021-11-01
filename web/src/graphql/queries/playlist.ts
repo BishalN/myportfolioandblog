@@ -8,6 +8,7 @@ export const playlistPageQuery = gql`
       slug
       description
       posts {
+        updated_at
         title
         topics
         description

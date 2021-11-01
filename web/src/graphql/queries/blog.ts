@@ -15,6 +15,7 @@ export const blogQuery = gql`
         name
         bio
         avatar {
+          formats
           url
         }
       }
@@ -22,6 +23,7 @@ export const blogQuery = gql`
         title
         slug
         posts {
+          updated_at
           title
           topics
           description

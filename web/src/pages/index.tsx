@@ -8,7 +8,7 @@ import {
   Text,
 } from '@chakra-ui/layout';
 import Head from 'next/head';
-import { Button, Grid, Link, Image } from '@chakra-ui/react';
+import { Grid, Link, Image } from '@chakra-ui/react';
 import {
   AiFillInstagram,
   AiFillYoutube,
@@ -20,22 +20,21 @@ import { GetStaticProps } from 'next';
 import { request } from 'graphql-request';
 import { homePageQuery } from '../graphql/queries/home';
 import { HomePageQuery } from '../generated';
-import NextImage from 'next/image';
 import { SpecialGridItem } from '../components/SpecialGridItem';
 import { BlogCard } from '../components/BlogCard';
+import NextLink from 'next/link';
+import NextImage from 'next/image';
+import { baseUrl } from '../utils/baseUrl';
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const landingPageData: HomePageQuery = await request(
-    'http://localhost:4000/graphql',
-    homePageQuery
-  );
+  const landingPageData: HomePageQuery = await request(baseUrl, homePageQuery);
   return {
     props: landingPageData,
   };
 };
 
 export default function Home(props: HomePageQuery) {
-  console.log(props.homepage.about['email']);
+  console.log(props.homepage.projects[0].bg.formats.large.url);
   return (
     <Box overflow='hidden'>
       <Head>
@@ -63,16 +62,19 @@ export default function Home(props: HomePageQuery) {
             >
               {props.homepage.hero?.navlinks.split(',').map((nav) => {
                 return (
-                  <Link
+                  <NextLink
                     key={nav}
                     href={
                       nav === 'contact'
                         ? `mailto:${props.homepage.contact.email}`
-                        : '#'
+                        : `#${nav}`
                     }
+                    passHref
                   >
-                    <Text>{nav}</Text>
-                  </Link>
+                    <Link>
+                      <Text>{nav}</Text>
+                    </Link>
+                  </NextLink>
                 );
               })}
             </HStack>
@@ -99,7 +101,7 @@ export default function Home(props: HomePageQuery) {
             <Box alignSelf='flex-end'>
               <Image
                 alt={props.homepage.hero.profile[0].name}
-                src={props.homepage.hero.profile[0].url}
+                src={props.homepage.hero.profile[0].formats.small.url}
                 position='absolute'
                 bottom='0'
                 borderBottomRightRadius='2xl'
@@ -115,7 +117,7 @@ export default function Home(props: HomePageQuery) {
         </main>
 
         {/* About section */}
-        <section>
+        <section id='about'>
           <Box
             mt='5'
             pl={{ base: '4', md: '28' }}
@@ -156,12 +158,7 @@ export default function Home(props: HomePageQuery) {
                 title='Watch.'
                 description={props.homepage.about.watch}
               >
-                <Link
-                  display='inline'
-                  ml='2'
-                  target='_blank'
-                  href={props.homepage.contact.youtube}
-                >
+                <Link as='span' display='inline' ml='2' target='_blank'>
                   Watch on youtube.
                 </Link>
               </SpecialGridItem>
@@ -171,11 +168,16 @@ export default function Home(props: HomePageQuery) {
       </Container>
 
       {/* work section */}
-      <section>
+      <section id='work'>
         <Box my='10'>
           {props.homepage.projects.map((proj) => {
             return (
-              <Box key={proj.title} backgroundImage={`url(${proj.bg.url})`}>
+              <Box
+                key={proj.title}
+                backgroundRepeat='no-repeat'
+                backgroundSize='cover'
+                backgroundImage={`url(${proj.bg.formats.large.url})`}
+              >
                 <Box
                   maxW='xl'
                   px={{ base: '10', md: '32' }}
@@ -205,7 +207,11 @@ export default function Home(props: HomePageQuery) {
                 </Box>
 
                 <Box display='flex' justifyContent='end' p='4'>
-                  <Image src={proj.image.url} alt={proj.image.name} />
+                  <NextImage
+                    src={proj.image.url}
+                    height={proj.image.height}
+                    width={proj.image.width}
+                  />
                 </Box>
               </Box>
             );
@@ -214,29 +220,38 @@ export default function Home(props: HomePageQuery) {
       </section>
 
       {/* blog section */}
-      <section>
+      <section id='blog'>
         <Box>
           <Box backgroundColor='pink.300' px='5' pb='4'>
             <Flex flexWrap='wrap' justifyContent='center'>
-              {props.posts.map((post) => (
-                <BlogCard
-                  key={post.title}
-                  description={post.description}
-                  title={post.title}
-                  topics={[...post.topics.split(',')]}
-                />
-              ))}
+              {props.posts.map((post) => {
+                console.log(post);
+                return (
+                  <BlogCard
+                    updatedDate={post.updated_at}
+                    slug={post.slug}
+                    key={post.title}
+                    description={post.description}
+                    title={post.title}
+                    topics={[...post.topics.split(',')]}
+                  />
+                );
+              })}
             </Flex>
 
             <Box display='flex' justifyContent='end' my='4'>
-              <Button>More posts</Button>
+              <NextLink href='/playlists' passHref>
+                <Link bg='white' p='2' rounded='lg'>
+                  More posts
+                </Link>
+              </NextLink>
             </Box>
           </Box>
         </Box>
       </section>
 
       {/* social media section */}
-      <section>
+      <section id='social'>
         <Box display='flex' flexDirection='column' alignItems='center' my='20'>
           <Text fontSize='6xl'>{props.homepage.contact.title}</Text>
           <HStack spacing='10'>
@@ -262,7 +277,7 @@ export default function Home(props: HomePageQuery) {
         </Box>
       </section>
 
-      <section>
+      <section id='credits'>
         <Box mx={5} display='flex' justifyContent='center' my='10'>
           <Text>
             Images by

@@ -43,11 +43,15 @@ const PlayListPage = (props: PlaylistPostsQuery) => {
         <Text as='h2' fontSize={{ base: '2xl', md: '5xl' }}>
           {props.playlists[0].title}
         </Text>
-        <Text color='gray.500'>{props.playlists[0].description}</Text>
+        <Text color='gray.500' maxW='4xl'>
+          {props.playlists[0].description}
+        </Text>
       </Box>
       <Flex flexWrap='wrap'>
         {props.playlists[0].posts.map((blog) => (
           <BlogCard
+            updatedDate={blog.updated_at}
+            slug={blog.slug}
             key={blog.title}
             title={blog.title}
             topics={blog.topics.split(',')}

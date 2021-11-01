@@ -1,4 +1,7 @@
 import { Box, Text, Link, Badge, Stack, Button } from '@chakra-ui/react';
+import { DateTime } from 'luxon';
+import { useRouter } from 'next/dist/client/router';
+import NextLink from 'next/link';
 
 type BlogCardItemProps = {
   title: string;
@@ -6,16 +9,18 @@ type BlogCardItemProps = {
   description?: string;
   noOfLines?: number;
   slug: string;
+  updatedDate: string;
 };
 
 export const BlogCard: React.FC<BlogCardItemProps> = ({
   title,
-  children,
   topics,
   description,
   noOfLines,
   slug,
+  updatedDate,
 }) => {
+  const formattedDate = DateTime.fromISO(updatedDate).toFormat('DD');
   return (
     <Box
       mx={{ base: '1', md: '4' }}
@@ -26,9 +31,13 @@ export const BlogCard: React.FC<BlogCardItemProps> = ({
       bg='gray.300'
     >
       <Text fontSize='xl' isTruncated color='green.500'>
-        <Link href={`/blog/${slug}`} target='_blank'>
-          {title}
-        </Link>
+        <NextLink href={`/blog/${slug}`} passHref>
+          <Link>{title}</Link>
+        </NextLink>
+      </Text>
+
+      <Text fontSize='sm' color='gray.600'>
+        Last updated {formattedDate}
       </Text>
 
       <Stack direction='row' my='2'>
@@ -40,7 +49,16 @@ export const BlogCard: React.FC<BlogCardItemProps> = ({
       <Text noOfLines={noOfLines || 10}>{description}</Text>
 
       <Box display='flex' justifyContent='end'>
-        <Button>Read Blog</Button>
+        <NextLink href={`/blog/${slug}`} passHref>
+          <Link
+            bg='white'
+            rounded='lg'
+            p='2'
+            _hover={{ bg: 'gray.500', color: 'white' }}
+          >
+            Read Blog
+          </Link>
+        </NextLink>
       </Box>
     </Box>
   );

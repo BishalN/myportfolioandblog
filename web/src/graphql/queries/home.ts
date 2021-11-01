@@ -7,6 +7,7 @@ export const homePageQuery = gql`
         title
         navlinks
         profile {
+          formats
           name
           width
           height
@@ -24,6 +25,7 @@ export const homePageQuery = gql`
         url
         bg {
           url
+          formats
         }
         description
         tools
@@ -45,7 +47,9 @@ export const homePageQuery = gql`
     }
     posts(sort: "created_at:desc", limit: 3) {
       title
+      updated_at
       topics
+      slug
       description
     }
   }

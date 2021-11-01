@@ -7,6 +7,7 @@ import { BlogCard } from '../components/BlogCard';
 import { PlaylistPageQuery } from '../generated';
 import { playlistPageQuery } from '../graphql/queries/playlist';
 import { baseUrl } from '../utils/baseUrl';
+import NextLink from 'next/link';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const playlistPageData: PlaylistPageQuery = await request(
@@ -19,7 +20,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const PlaylistCollection = (props: PlaylistPageQuery) => {
-  console.log(props);
   return (
     <Container my='5' maxW='container.xl' overflow='hidden'>
       <Box mb='5' ml='3'>
@@ -33,7 +33,6 @@ const PlaylistCollection = (props: PlaylistPageQuery) => {
       </Box>
       <VStack spacing='5'>
         {props.playlists.map((playlist) => {
-          console.log(playlist.slug);
           return (
             <PlayList
               key={playlist.title}
@@ -53,6 +52,7 @@ export type Blog = {
   description: string;
   topics: string;
   slug: string;
+  updated_at: string;
 };
 
 type PlayListProps = {
@@ -71,12 +71,15 @@ export const PlayList: React.FC<PlayListProps> = ({
     <Box w='full'>
       <Text as='h2' mb='-4' ml={{ base: '3', md: '3' }} fontSize='2xl'>
         <Tooltip label='See all the blogs in this playlist'>
-          <Link href={`/playlist/${slug}`}>{title}</Link>
+          <NextLink href={`/playlist/${slug}`} passHref>
+            <Link>{title}</Link>
+          </NextLink>
         </Tooltip>
       </Text>
       <Flex flexWrap='wrap'>
         {blogs.map((blog) => (
           <BlogCard
+            updatedDate={blog.updated_at}
             slug={blog.slug}
             key={blog.title}
             title={blog.title}

@@ -1578,12 +1578,12 @@ export type BlogQueryVariables = Exact<{
 }>;
 
 
-export type BlogQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Posts', id: string, title: string, created_at: any, updated_at: any, topics: string, description?: string | null | undefined, slug: string, writer?: { __typename?: 'Writer', id: string, name: string, bio: string, avatar?: { __typename?: 'UploadFile', url: string } | null | undefined } | null | undefined, playlist?: { __typename?: 'Playlist', title: string, slug: string, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined };
+export type BlogQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Posts', id: string, title: string, created_at: any, updated_at: any, topics: string, description?: string | null | undefined, slug: string, writer?: { __typename?: 'Writer', id: string, name: string, bio: string, avatar?: { __typename?: 'UploadFile', formats?: any | null | undefined, url: string } | null | undefined } | null | undefined, playlist?: { __typename?: 'Playlist', title: string, slug: string, posts?: Array<{ __typename?: 'Posts', updated_at: any, title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined };
 
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', hero?: { __typename?: 'ComponentSectionHero', title: string, navlinks: string, profile?: Array<{ __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined> | null | undefined } | null | undefined, about?: { __typename?: 'ComponentSectionAbout', work: string, blogs: string, watch: string, email: string } | null | undefined, projects?: Array<{ __typename?: 'ComponentSectionProjects', title: string, description: string, tools: string, url: string, bg?: { __typename?: 'UploadFile', url: string } | null | undefined, image?: { __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined } | null | undefined> | null | undefined, contact?: { __typename?: 'ComponentSectionContact', email: string, insta: string, youtube: string, twitter: string, linkedin: string, title: string } | null | undefined } | null | undefined, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined } | null | undefined> | null | undefined };
+export type HomePageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', hero?: { __typename?: 'ComponentSectionHero', title: string, navlinks: string, profile?: Array<{ __typename?: 'UploadFile', formats?: any | null | undefined, name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined> | null | undefined } | null | undefined, about?: { __typename?: 'ComponentSectionAbout', work: string, blogs: string, watch: string, email: string } | null | undefined, projects?: Array<{ __typename?: 'ComponentSectionProjects', title: string, url: string, description: string, tools: string, bg?: { __typename?: 'UploadFile', url: string, formats?: any | null | undefined } | null | undefined, image?: { __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined } | null | undefined> | null | undefined, contact?: { __typename?: 'ComponentSectionContact', email: string, insta: string, youtube: string, twitter: string, linkedin: string, title: string } | null | undefined } | null | undefined, posts?: Array<{ __typename?: 'Posts', title: string, updated_at: any, topics: string, slug: string, description?: string | null | undefined } | null | undefined> | null | undefined };
 
 export type StaticPlaylistsPathQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1598,14 +1598,14 @@ export type StaticPostsPathQuery = { __typename?: 'Query', posts?: Array<{ __typ
 export type PlaylistPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PlaylistPageQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, slug: string, description: string, posts?: Array<{ __typename?: 'Posts', title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+export type PlaylistPageQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, slug: string, description: string, posts?: Array<{ __typename?: 'Posts', updated_at: any, title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
 
 export type PlaylistPostsQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type PlaylistPostsQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, description: string, posts?: Array<{ __typename?: 'Posts', id: string, title: string, topics: string, slug: string, description?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+export type PlaylistPostsQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, description: string, posts?: Array<{ __typename?: 'Posts', id: string, updated_at: any, title: string, topics: string, slug: string, description?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
 
 
 export const BlogDocument = `
@@ -1623,6 +1623,7 @@ export const BlogDocument = `
       name
       bio
       avatar {
+        formats
         url
       }
     }
@@ -1630,6 +1631,7 @@ export const BlogDocument = `
       title
       slug
       posts {
+        updated_at
         title
         topics
         description
@@ -1658,6 +1660,7 @@ export const HomePageDocument = `
       title
       navlinks
       profile {
+        formats
         name
         width
         height
@@ -1672,12 +1675,13 @@ export const HomePageDocument = `
     }
     projects {
       title
-      description
-      tools
       url
       bg {
         url
+        formats
       }
+      description
+      tools
       image {
         name
         width
@@ -1696,7 +1700,9 @@ export const HomePageDocument = `
   }
   posts(sort: "created_at:desc", limit: 3) {
     title
+    updated_at
     topics
+    slug
     description
   }
 }
@@ -1759,6 +1765,7 @@ export const PlaylistPageDocument = `
     slug
     description
     posts {
+      updated_at
       title
       topics
       description
@@ -1787,6 +1794,7 @@ export const PlaylistPostsDocument = `
     description
     posts {
       id
+      updated_at
       title
       topics
       slug

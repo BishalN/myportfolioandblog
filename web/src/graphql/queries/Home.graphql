@@ -4,6 +4,7 @@ query HomePage {
       title
       navlinks
       profile {
+        formats
         name
         width
         height
@@ -18,12 +19,13 @@ query HomePage {
     }
     projects {
       title
-      description
-      tools
       url
       bg {
         url
+        formats
       }
+      description
+      tools
       image {
         name
         width
@@ -42,7 +44,9 @@ query HomePage {
   }
   posts(sort: "created_at:desc", limit: 3) {
     title
+    updated_at
     topics
+    slug
     description
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Box, Flex, Image, Link, Stack, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Image, Stack, Link, Text } from '@chakra-ui/react';
 import { BlogQuery, StaticPostsPathQuery } from '../../generated';
 import { request } from 'graphql-request';
 import { baseUrl } from '../../utils/baseUrl';
@@ -7,9 +7,11 @@ import { staticPostPathsQuery } from '../../graphql/queries/StaticPostPaths';
 import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { GetStaticProps } from 'next';
-import { blogQuery } from '../../graphql/blog';
+import { blogQuery } from '../../graphql/queries/blog';
 import { DateTime } from 'luxon';
 import { BlogCard } from '../../components/BlogCard';
+import { timetoRead } from '../../utils/calculateTimeToRead';
+import NextLink from 'next/link';
 
 export async function getStaticPaths() {
   const paths: StaticPostsPathQuery = await request(
@@ -39,15 +41,15 @@ const BlogPage = (props: BlogQuery) => {
   const formattedDate = DateTime.fromISO(props.posts[0].updated_at).toFormat(
     'DD'
   );
+
   return (
     <Box>
-      {/* author intro */}
       <section>
         <Flex>
           <Box border='1px' m='2' p='5' w='3xl' borderColor='gray.500'>
             <Flex>
               <Image
-                src={props.posts[0].writer.avatar.url}
+                src={props.posts[0].writer.avatar.formats.thumbnail.url}
                 boxSize={100}
                 rounded='full'
                 alt='me'
@@ -58,10 +60,15 @@ const BlogPage = (props: BlogQuery) => {
               </Box>
             </Flex>
             <Box mt='2' mb='5'>
-              <Text fontSize='4xl'>{props.posts[0].title}</Text>
-              <Text fontSize='xs' mb='2' color='gray.400'>
-                Last updated {formattedDate}
-              </Text>
+              <Box>
+                <Text fontSize='4xl'>{props.posts[0].title}</Text>
+                <Text fontSize='xs' color='gray.400'>
+                  Last updated {formattedDate}
+                </Text>
+                <Text fontSize='sm' color='gray.600'>
+                  ~ {timetoRead(props.posts[0].description)} minute read
+                </Text>
+              </Box>
               <Stack direction='row'>
                 {props.posts[0].topics.split(',').map((tool) => (
                   <Badge key={tool}>{tool}</Badge>
@@ -106,9 +113,21 @@ const BlogPage = (props: BlogQuery) => {
               },
             }}
           >
-            <Text ml='3'>Some other post on same playlist</Text>
+            <Text ml='3'>
+              Related posts on{' '}
+              <NextLink
+                href={`/playlist/${props.posts[0].playlist?.slug}`}
+                passHref
+              >
+                <Link color='green.500' mr='1'>
+                  {props.posts[0].playlist?.title}
+                </Link>
+              </NextLink>
+              playlist
+            </Text>
             {props.posts[0].playlist?.posts.map((post) => (
               <BlogCard
+                updatedDate={post.updated_at}
                 slug={post.slug}
                 noOfLines={2}
                 key={post.title}

@@ -5,6 +5,7 @@ query PlaylistPage {
     slug
     description
     posts {
+      updated_at
       title
       topics
       description

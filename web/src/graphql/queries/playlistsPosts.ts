@@ -7,6 +7,7 @@ export const PlaylistsPosts = gql`
       title
       description
       posts {
+        updated_at
         id
         title
         topics

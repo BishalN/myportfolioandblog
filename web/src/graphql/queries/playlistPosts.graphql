@@ -5,6 +5,7 @@ query PlaylistPosts($slug: String!) {
     description
     posts {
       id
+      updated_at
       title
       topics
       slug
