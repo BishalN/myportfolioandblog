@@ -27,7 +27,7 @@
       "pluginOptions": {}
     },
     "bio": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "posts": {

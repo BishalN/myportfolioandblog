@@ -26,7 +26,7 @@ export const BlogCard: React.FC<BlogCardItemProps> = ({
       mx={{ base: '1', md: '4' }}
       mt='4'
       w={{ base: '100%', md: 'sm' }}
-      rounded='sm'
+      rounded='lg'
       p='3'
       bg='gray.300'
     >

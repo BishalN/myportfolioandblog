@@ -222,7 +222,7 @@ export default function Home(props: HomePageQuery) {
       {/* blog section */}
       <section id='blog'>
         <Box>
-          <Box backgroundColor='pink.300' px='5' pb='4'>
+          <Box backgroundColor='blue.700' px='5' pb='4'>
             <Flex flexWrap='wrap' justifyContent='center'>
               {props.posts.map((post) => {
                 return (

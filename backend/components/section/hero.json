@@ -2,12 +2,13 @@
   "collectionName": "components_section_heroes",
   "info": {
     "name": "Hero",
-    "icon": "ambulance"
+    "icon": "ambulance",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "navlinks": {

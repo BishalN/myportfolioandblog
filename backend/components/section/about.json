@@ -8,19 +8,19 @@
   "options": {},
   "attributes": {
     "work": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "blogs": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "watch": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "email": {
-      "type": "string",
+      "type": "text",
       "required": true
     }
   }
