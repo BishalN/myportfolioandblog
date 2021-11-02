@@ -36,7 +36,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const PlayListPage = (props: PlaylistPostsQuery) => {
-  console.log(props);
   return (
     <Box overflow='hidden'>
       <Box mb='5' ml='3'>

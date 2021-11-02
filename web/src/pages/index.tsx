@@ -34,7 +34,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export default function Home(props: HomePageQuery) {
-  console.log(props.homepage.projects[0].bg.formats.large.url);
   return (
     <Box overflow='hidden'>
       <Head>
@@ -171,6 +170,7 @@ export default function Home(props: HomePageQuery) {
       <section id='work'>
         <Box my='10'>
           {props.homepage.projects.map((proj) => {
+            console.log(proj);
             return (
               <Box
                 key={proj.title}
@@ -225,7 +225,6 @@ export default function Home(props: HomePageQuery) {
           <Box backgroundColor='pink.300' px='5' pb='4'>
             <Flex flexWrap='wrap' justifyContent='center'>
               {props.posts.map((post) => {
-                console.log(post);
                 return (
                   <BlogCard
                     updatedDate={post.updated_at}
