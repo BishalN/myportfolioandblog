@@ -12,6 +12,7 @@ import { DateTime } from 'luxon';
 import { BlogCard } from '../../components/BlogCard';
 import { timetoRead } from '../../utils/calculateTimeToRead';
 import NextLink from 'next/link';
+import { GoBack } from '../../components/GoBack';
 
 export async function getStaticPaths() {
   const paths: StaticPostsPathQuery = await request(
@@ -47,6 +48,7 @@ const BlogPage = (props: BlogQuery) => {
       <section>
         <Flex>
           <Box border='1px' m='2' p='5' w='3xl' borderColor='gray.500'>
+            <GoBack />
             <Flex>
               <Image
                 src={props.posts[0].writer.avatar.formats.thumbnail.url}

@@ -18,7 +18,6 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  /* background: linear-gradient(90deg, #434343, #434343 1px, #111 0, #111); */
   background: rgb(209, 209, 209);
 }
 

@@ -8,6 +8,8 @@ import { PlaylistPageQuery } from '../generated';
 import { playlistPageQuery } from '../graphql/queries/playlist';
 import { baseUrl } from '../utils/baseUrl';
 import NextLink from 'next/link';
+import { useRouter } from 'next/dist/client/router';
+import { GoBack } from '../components/GoBack';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const playlistPageData: PlaylistPageQuery = await request(
@@ -23,6 +25,7 @@ const PlaylistCollection = (props: PlaylistPageQuery) => {
   return (
     <Container my='5' maxW='container.xl' overflow='hidden'>
       <Box mb='5' ml='3'>
+        <GoBack />
         <Text as='h2' fontSize={{ base: '2xl', md: '5xl' }}>
           Welcome to Blog playlist
         </Text>

@@ -10,6 +10,7 @@ import { PlaylistsPosts } from '../../graphql/queries/playlistsPosts';
 import { staticPlaylistsPathsQuery } from '../../graphql/queries/StaticPlaylistsPathQuery';
 import { baseUrl } from '../../utils/baseUrl';
 import { BlogCard } from '../../components/BlogCard';
+import { GoBack } from '../../components/GoBack';
 
 export async function getStaticPaths() {
   const paths: StaticPlaylistsPathQueryQuery = await request(
@@ -39,6 +40,7 @@ const PlayListPage = (props: PlaylistPostsQuery) => {
   return (
     <Box overflow='hidden'>
       <Box mb='5' ml='3'>
+        <GoBack />
         <Text as='h2' fontSize={{ base: '2xl', md: '5xl' }}>
           {props.playlists[0].title}
         </Text>
