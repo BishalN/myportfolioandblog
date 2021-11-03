@@ -14,16 +14,6 @@ import {
   AiFillYoutube,
   AiOutlineTwitter,
 } from 'react-icons/ai';
-import * as ReactScroll from 'react-scroll';
-import {
-  Link as ScrollLink,
-  Button,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from 'react-scroll';
 import { GrMail } from 'react-icons/gr';
 import React from 'react';
 import { GetStaticProps } from 'next';
