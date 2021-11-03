@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text } from '@chakra-ui/layout';
+import { Box, Flex, Text } from '@chakra-ui/layout';
 import { request } from 'graphql-request';
 import { GetStaticProps } from 'next';
 import React from 'react';

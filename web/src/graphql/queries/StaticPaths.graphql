@@ -1,5 +1,0 @@
-query StaticPlaylistsPathQuery {
-  playlists {
-    slug
-  }
-}

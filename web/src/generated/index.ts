@@ -1,13 +1,19 @@
 import { useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
-    const res = await fetch("http://localhost:4000/graphql", {
-    method: "POST",
+    const res = await fetch('http://localhost:4000/graphql', {
+      method: 'POST',
       body: JSON.stringify({ query, variables }),
     });
 
@@ -20,7 +26,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
     }
 
     return json.data;
-  }
+  };
 }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -94,7 +100,6 @@ export type ComponentSectionHero = {
   profile?: Maybe<Array<Maybe<UploadFile>>>;
   title: Scalars['String'];
 };
-
 
 export type ComponentSectionHeroProfileArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -197,7 +202,118 @@ export type LocaleInput = {
   updated_by?: Maybe<Scalars['ID']>;
 };
 
-export type Morph = ComponentSectionAbout | ComponentSectionContact | ComponentSectionHero | ComponentSectionProjects | Homepage | I18NLocale | Playlist | PlaylistAggregator | PlaylistConnection | PlaylistConnectionCreated_At | PlaylistConnectionDescription | PlaylistConnectionId | PlaylistConnectionPublished_At | PlaylistConnectionSlug | PlaylistConnectionTitle | PlaylistConnectionUpdated_At | PlaylistGroupBy | Posts | PostsAggregator | PostsConnection | PostsConnectionCreated_At | PostsConnectionDescription | PostsConnectionId | PostsConnectionPlaylist | PostsConnectionPublished_At | PostsConnectionSlug | PostsConnectionTitle | PostsConnectionTopics | PostsConnectionUpdated_At | PostsConnectionWriter | PostsGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | Writer | WriterAggregator | WriterConnection | WriterConnectionAvatar | WriterConnectionBio | WriterConnectionCreated_At | WriterConnectionId | WriterConnectionName | WriterConnectionPublished_At | WriterConnectionUpdated_At | WriterGroupBy | CreatePlaylistPayload | CreatePostPayload | CreateRolePayload | CreateUserPayload | CreateWriterPayload | DeleteFilePayload | DeleteHomepagePayload | DeletePlaylistPayload | DeletePostPayload | DeleteRolePayload | DeleteUserPayload | DeleteWriterPayload | UpdateHomepagePayload | UpdatePlaylistPayload | UpdatePostPayload | UpdateRolePayload | UpdateUserPayload | UpdateWriterPayload;
+export type Morph =
+  | ComponentSectionAbout
+  | ComponentSectionContact
+  | ComponentSectionHero
+  | ComponentSectionProjects
+  | Homepage
+  | I18NLocale
+  | Playlist
+  | PlaylistAggregator
+  | PlaylistConnection
+  | PlaylistConnectionCreated_At
+  | PlaylistConnectionDescription
+  | PlaylistConnectionId
+  | PlaylistConnectionPublished_At
+  | PlaylistConnectionSlug
+  | PlaylistConnectionTitle
+  | PlaylistConnectionUpdated_At
+  | PlaylistGroupBy
+  | Posts
+  | PostsAggregator
+  | PostsConnection
+  | PostsConnectionCreated_At
+  | PostsConnectionDescription
+  | PostsConnectionId
+  | PostsConnectionPlaylist
+  | PostsConnectionPublished_At
+  | PostsConnectionSlug
+  | PostsConnectionTitle
+  | PostsConnectionTopics
+  | PostsConnectionUpdated_At
+  | PostsConnectionWriter
+  | PostsGroupBy
+  | UploadFile
+  | UploadFileAggregator
+  | UploadFileAggregatorAvg
+  | UploadFileAggregatorMax
+  | UploadFileAggregatorMin
+  | UploadFileAggregatorSum
+  | UploadFileConnection
+  | UploadFileConnectionAlternativeText
+  | UploadFileConnectionCaption
+  | UploadFileConnectionCreated_At
+  | UploadFileConnectionExt
+  | UploadFileConnectionFormats
+  | UploadFileConnectionHash
+  | UploadFileConnectionHeight
+  | UploadFileConnectionId
+  | UploadFileConnectionMime
+  | UploadFileConnectionName
+  | UploadFileConnectionPreviewUrl
+  | UploadFileConnectionProvider
+  | UploadFileConnectionProvider_Metadata
+  | UploadFileConnectionSize
+  | UploadFileConnectionUpdated_At
+  | UploadFileConnectionUrl
+  | UploadFileConnectionWidth
+  | UploadFileGroupBy
+  | UserPermissionsPasswordPayload
+  | UsersPermissionsLoginPayload
+  | UsersPermissionsMe
+  | UsersPermissionsMeRole
+  | UsersPermissionsPermission
+  | UsersPermissionsRole
+  | UsersPermissionsRoleAggregator
+  | UsersPermissionsRoleConnection
+  | UsersPermissionsRoleConnectionDescription
+  | UsersPermissionsRoleConnectionId
+  | UsersPermissionsRoleConnectionName
+  | UsersPermissionsRoleConnectionType
+  | UsersPermissionsRoleGroupBy
+  | UsersPermissionsUser
+  | UsersPermissionsUserAggregator
+  | UsersPermissionsUserConnection
+  | UsersPermissionsUserConnectionBlocked
+  | UsersPermissionsUserConnectionConfirmed
+  | UsersPermissionsUserConnectionCreated_At
+  | UsersPermissionsUserConnectionEmail
+  | UsersPermissionsUserConnectionId
+  | UsersPermissionsUserConnectionProvider
+  | UsersPermissionsUserConnectionRole
+  | UsersPermissionsUserConnectionUpdated_At
+  | UsersPermissionsUserConnectionUsername
+  | UsersPermissionsUserGroupBy
+  | Writer
+  | WriterAggregator
+  | WriterConnection
+  | WriterConnectionAvatar
+  | WriterConnectionBio
+  | WriterConnectionCreated_At
+  | WriterConnectionId
+  | WriterConnectionName
+  | WriterConnectionPublished_At
+  | WriterConnectionUpdated_At
+  | WriterGroupBy
+  | CreatePlaylistPayload
+  | CreatePostPayload
+  | CreateRolePayload
+  | CreateUserPayload
+  | CreateWriterPayload
+  | DeleteFilePayload
+  | DeleteHomepagePayload
+  | DeletePlaylistPayload
+  | DeletePostPayload
+  | DeleteRolePayload
+  | DeleteUserPayload
+  | DeleteWriterPayload
+  | UpdateHomepagePayload
+  | UpdatePlaylistPayload
+  | UpdatePostPayload
+  | UpdateRolePayload
+  | UpdateUserPayload
+  | UpdateWriterPayload;
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -236,76 +352,61 @@ export type Mutation = {
   upload: UploadFile;
 };
 
-
 export type MutationCreatePlaylistArgs = {
   input?: Maybe<CreatePlaylistInput>;
 };
-
 
 export type MutationCreatePostArgs = {
   input?: Maybe<CreatePostInput>;
 };
 
-
 export type MutationCreateRoleArgs = {
   input?: Maybe<CreateRoleInput>;
 };
-
 
 export type MutationCreateUserArgs = {
   input?: Maybe<CreateUserInput>;
 };
 
-
 export type MutationCreateWriterArgs = {
   input?: Maybe<CreateWriterInput>;
 };
-
 
 export type MutationDeleteFileArgs = {
   input?: Maybe<DeleteFileInput>;
 };
 
-
 export type MutationDeletePlaylistArgs = {
   input?: Maybe<DeletePlaylistInput>;
 };
-
 
 export type MutationDeletePostArgs = {
   input?: Maybe<DeletePostInput>;
 };
 
-
 export type MutationDeleteRoleArgs = {
   input?: Maybe<DeleteRoleInput>;
 };
-
 
 export type MutationDeleteUserArgs = {
   input?: Maybe<DeleteUserInput>;
 };
 
-
 export type MutationDeleteWriterArgs = {
   input?: Maybe<DeleteWriterInput>;
 };
-
 
 export type MutationEmailConfirmationArgs = {
   confirmation: Scalars['String'];
 };
 
-
 export type MutationForgotPasswordArgs = {
   email: Scalars['String'];
 };
 
-
 export type MutationLoginArgs = {
   input: UsersPermissionsLoginInput;
 };
-
 
 export type MutationMultipleUploadArgs = {
   field?: Maybe<Scalars['String']>;
@@ -315,11 +416,9 @@ export type MutationMultipleUploadArgs = {
   source?: Maybe<Scalars['String']>;
 };
 
-
 export type MutationRegisterArgs = {
   input: UsersPermissionsRegisterInput;
 };
-
 
 export type MutationResetPasswordArgs = {
   code: Scalars['String'];
@@ -327,42 +426,34 @@ export type MutationResetPasswordArgs = {
   passwordConfirmation: Scalars['String'];
 };
 
-
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
   info: FileInfoInput;
 };
 
-
 export type MutationUpdateHomepageArgs = {
   input?: Maybe<UpdateHomepageInput>;
 };
-
 
 export type MutationUpdatePlaylistArgs = {
   input?: Maybe<UpdatePlaylistInput>;
 };
 
-
 export type MutationUpdatePostArgs = {
   input?: Maybe<UpdatePostInput>;
 };
-
 
 export type MutationUpdateRoleArgs = {
   input?: Maybe<UpdateRoleInput>;
 };
 
-
 export type MutationUpdateUserArgs = {
   input?: Maybe<UpdateUserInput>;
 };
 
-
 export type MutationUpdateWriterArgs = {
   input?: Maybe<UpdateWriterInput>;
 };
-
 
 export type MutationUploadArgs = {
   field?: Maybe<Scalars['String']>;
@@ -384,7 +475,6 @@ export type Playlist = {
   title: Scalars['String'];
   updated_at: Scalars['DateTime'];
 };
-
 
 export type PlaylistPostsArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -584,7 +674,7 @@ export type PostsGroupBy = {
 
 export enum PublicationState {
   Live = 'LIVE',
-  Preview = 'PREVIEW'
+  Preview = 'PREVIEW',
 }
 
 export type Query = {
@@ -611,7 +701,6 @@ export type Query = {
   writersConnection?: Maybe<WriterConnection>;
 };
 
-
 export type QueryFilesArgs = {
   limit?: Maybe<Scalars['Int']>;
   publicationState?: Maybe<PublicationState>;
@@ -620,7 +709,6 @@ export type QueryFilesArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryFilesConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
@@ -628,17 +716,14 @@ export type QueryFilesConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryHomepageArgs = {
   publicationState?: Maybe<PublicationState>;
 };
-
 
 export type QueryPlaylistArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
-
 
 export type QueryPlaylistsArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -648,7 +733,6 @@ export type QueryPlaylistsArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryPlaylistsConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
@@ -656,12 +740,10 @@ export type QueryPlaylistsConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryPostArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
-
 
 export type QueryPostsArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -671,7 +753,6 @@ export type QueryPostsArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryPostsConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
@@ -679,12 +760,10 @@ export type QueryPostsConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryRoleArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
-
 
 export type QueryRolesArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -694,7 +773,6 @@ export type QueryRolesArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryRolesConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
@@ -702,12 +780,10 @@ export type QueryRolesConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryUserArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
-
 
 export type QueryUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -717,7 +793,6 @@ export type QueryUsersArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryUsersConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
@@ -725,12 +800,10 @@ export type QueryUsersConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type QueryWriterArgs = {
   id: Scalars['ID'];
   publicationState?: Maybe<PublicationState>;
 };
-
 
 export type QueryWritersArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -739,7 +812,6 @@ export type QueryWritersArgs = {
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
-
 
 export type QueryWritersConnectionArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -779,7 +851,6 @@ export type UploadFile = {
   url: Scalars['String'];
   width?: Maybe<Scalars['Int']>;
 };
-
 
 export type UploadFileRelatedArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -949,7 +1020,9 @@ export type UploadFileGroupBy = {
   name?: Maybe<Array<Maybe<UploadFileConnectionName>>>;
   previewUrl?: Maybe<Array<Maybe<UploadFileConnectionPreviewUrl>>>;
   provider?: Maybe<Array<Maybe<UploadFileConnectionProvider>>>;
-  provider_metadata?: Maybe<Array<Maybe<UploadFileConnectionProvider_Metadata>>>;
+  provider_metadata?: Maybe<
+    Array<Maybe<UploadFileConnectionProvider_Metadata>>
+  >;
   size?: Maybe<Array<Maybe<UploadFileConnectionSize>>>;
   updated_at?: Maybe<Array<Maybe<UploadFileConnectionUpdated_At>>>;
   url?: Maybe<Array<Maybe<UploadFileConnectionUrl>>>;
@@ -1032,14 +1105,12 @@ export type UsersPermissionsRole = {
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
 };
 
-
 export type UsersPermissionsRolePermissionsArgs = {
   limit?: Maybe<Scalars['Int']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
-
 
 export type UsersPermissionsRoleUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -1197,7 +1268,6 @@ export type Writer = {
   published_at?: Maybe<Scalars['DateTime']>;
   updated_at: Scalars['DateTime'];
 };
-
 
 export type WriterPostsArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -1577,36 +1647,264 @@ export type BlogQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
+export type BlogQuery = {
+  __typename?: 'Query';
+  posts?:
+    | Array<
+        | {
+            __typename?: 'Posts';
+            id: string;
+            title: string;
+            created_at: any;
+            updated_at: any;
+            topics: string;
+            description?: string | null | undefined;
+            slug: string;
+            writer?:
+              | {
+                  __typename?: 'Writer';
+                  id: string;
+                  name: string;
+                  bio: string;
+                  avatar?:
+                    | {
+                        __typename?: 'UploadFile';
+                        formats?: any | null | undefined;
+                        url: string;
+                      }
+                    | null
+                    | undefined;
+                }
+              | null
+              | undefined;
+            playlist?:
+              | {
+                  __typename?: 'Playlist';
+                  title: string;
+                  slug: string;
+                  posts?:
+                    | Array<
+                        | {
+                            __typename?: 'Posts';
+                            updated_at: any;
+                            title: string;
+                            topics: string;
+                            description?: string | null | undefined;
+                            slug: string;
+                          }
+                        | null
+                        | undefined
+                      >
+                    | null
+                    | undefined;
+                }
+              | null
+              | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
+};
 
-export type BlogQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Posts', id: string, title: string, created_at: any, updated_at: any, topics: string, description?: string | null | undefined, slug: string, writer?: { __typename?: 'Writer', id: string, name: string, bio: string, avatar?: { __typename?: 'UploadFile', formats?: any | null | undefined, url: string } | null | undefined } | null | undefined, playlist?: { __typename?: 'Playlist', title: string, slug: string, posts?: Array<{ __typename?: 'Posts', updated_at: any, title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined };
+export type HomePageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
+export type HomePageQuery = {
+  __typename?: 'Query';
+  homepage?:
+    | {
+        __typename?: 'Homepage';
+        hero?:
+          | {
+              __typename?: 'ComponentSectionHero';
+              title: string;
+              navlinks: string;
+              profile?:
+                | Array<
+                    | {
+                        __typename?: 'UploadFile';
+                        formats?: any | null | undefined;
+                        name: string;
+                        width?: number | null | undefined;
+                        height?: number | null | undefined;
+                        url: string;
+                      }
+                    | null
+                    | undefined
+                  >
+                | null
+                | undefined;
+            }
+          | null
+          | undefined;
+        about?:
+          | {
+              __typename?: 'ComponentSectionAbout';
+              work: string;
+              blogs: string;
+              watch: string;
+              email: string;
+            }
+          | null
+          | undefined;
+        projects?:
+          | Array<
+              | {
+                  __typename?: 'ComponentSectionProjects';
+                  title: string;
+                  url: string;
+                  description: string;
+                  tools: string;
+                  bg?:
+                    | {
+                        __typename?: 'UploadFile';
+                        url: string;
+                        formats?: any | null | undefined;
+                      }
+                    | null
+                    | undefined;
+                  image?:
+                    | {
+                        __typename?: 'UploadFile';
+                        name: string;
+                        width?: number | null | undefined;
+                        height?: number | null | undefined;
+                        url: string;
+                      }
+                    | null
+                    | undefined;
+                }
+              | null
+              | undefined
+            >
+          | null
+          | undefined;
+        contact?:
+          | {
+              __typename?: 'ComponentSectionContact';
+              email: string;
+              insta: string;
+              youtube: string;
+              twitter: string;
+              linkedin: string;
+              title: string;
+            }
+          | null
+          | undefined;
+      }
+    | null
+    | undefined;
+  posts?:
+    | Array<
+        | {
+            __typename?: 'Posts';
+            title: string;
+            updated_at: any;
+            topics: string;
+            slug: string;
+            description?: string | null | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
+};
 
+export type StaticPlaylistsPathQueryQueryVariables = Exact<{
+  [key: string]: never;
+}>;
 
-export type HomePageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', hero?: { __typename?: 'ComponentSectionHero', title: string, navlinks: string, profile?: Array<{ __typename?: 'UploadFile', formats?: any | null | undefined, name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined> | null | undefined } | null | undefined, about?: { __typename?: 'ComponentSectionAbout', work: string, blogs: string, watch: string, email: string } | null | undefined, projects?: Array<{ __typename?: 'ComponentSectionProjects', title: string, url: string, description: string, tools: string, bg?: { __typename?: 'UploadFile', url: string, formats?: any | null | undefined } | null | undefined, image?: { __typename?: 'UploadFile', name: string, width?: number | null | undefined, height?: number | null | undefined, url: string } | null | undefined } | null | undefined> | null | undefined, contact?: { __typename?: 'ComponentSectionContact', email: string, insta: string, youtube: string, twitter: string, linkedin: string, title: string } | null | undefined } | null | undefined, posts?: Array<{ __typename?: 'Posts', title: string, updated_at: any, topics: string, slug: string, description?: string | null | undefined } | null | undefined> | null | undefined };
+export type StaticPlaylistsPathQueryQuery = {
+  __typename?: 'Query';
+  playlists?:
+    | Array<{ __typename?: 'Playlist'; slug: string } | null | undefined>
+    | null
+    | undefined;
+};
 
-export type StaticPlaylistsPathQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type StaticPostsPathQueryVariables = Exact<{ [key: string]: never }>;
 
+export type StaticPostsPathQuery = {
+  __typename?: 'Query';
+  posts?:
+    | Array<{ __typename?: 'Posts'; slug: string } | null | undefined>
+    | null
+    | undefined;
+};
 
-export type StaticPlaylistsPathQueryQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', slug: string } | null | undefined> | null | undefined };
+export type PlaylistPageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type StaticPostsPathQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type StaticPostsPathQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Posts', slug: string } | null | undefined> | null | undefined };
-
-export type PlaylistPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PlaylistPageQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, slug: string, description: string, posts?: Array<{ __typename?: 'Posts', updated_at: any, title: string, topics: string, description?: string | null | undefined, slug: string } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
+export type PlaylistPageQuery = {
+  __typename?: 'Query';
+  playlists?:
+    | Array<
+        | {
+            __typename?: 'Playlist';
+            id: string;
+            title: string;
+            slug: string;
+            description: string;
+            posts?:
+              | Array<
+                  | {
+                      __typename?: 'Posts';
+                      updated_at: any;
+                      title: string;
+                      topics: string;
+                      description?: string | null | undefined;
+                      slug: string;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
+};
 
 export type PlaylistPostsQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
-
-export type PlaylistPostsQuery = { __typename?: 'Query', playlists?: Array<{ __typename?: 'Playlist', id: string, title: string, description: string, posts?: Array<{ __typename?: 'Posts', id: string, updated_at: any, title: string, topics: string, slug: string, description?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined> | null | undefined };
-
+export type PlaylistPostsQuery = {
+  __typename?: 'Query';
+  playlists?:
+    | Array<
+        | {
+            __typename?: 'Playlist';
+            id: string;
+            title: string;
+            description: string;
+            posts?:
+              | Array<
+                  | {
+                      __typename?: 'Posts';
+                      id: string;
+                      updated_at: any;
+                      title: string;
+                      topics: string;
+                      slug: string;
+                      description?: string | null | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
+};
 
 export const BlogDocument = `
     query Blog($slug: String!) {
@@ -1641,18 +1939,15 @@ export const BlogDocument = `
   }
 }
     `;
-export const useBlogQuery = <
-      TData = BlogQuery,
-      TError = unknown
-    >(
-      variables: BlogQueryVariables,
-      options?: UseQueryOptions<BlogQuery, TError, TData>
-    ) =>
-    useQuery<BlogQuery, TError, TData>(
-      ['Blog', variables],
-      fetcher<BlogQuery, BlogQueryVariables>(BlogDocument, variables),
-      options
-    );
+export const useBlogQuery = <TData = BlogQuery, TError = unknown>(
+  variables: BlogQueryVariables,
+  options?: UseQueryOptions<BlogQuery, TError, TData>
+) =>
+  useQuery<BlogQuery, TError, TData>(
+    ['Blog', variables],
+    fetcher<BlogQuery, BlogQueryVariables>(BlogDocument, variables),
+    options
+  );
 export const HomePageDocument = `
     query HomePage {
   homepage {
@@ -1707,18 +2002,15 @@ export const HomePageDocument = `
   }
 }
     `;
-export const useHomePageQuery = <
-      TData = HomePageQuery,
-      TError = unknown
-    >(
-      variables?: HomePageQueryVariables,
-      options?: UseQueryOptions<HomePageQuery, TError, TData>
-    ) =>
-    useQuery<HomePageQuery, TError, TData>(
-      variables === undefined ? ['HomePage'] : ['HomePage', variables],
-      fetcher<HomePageQuery, HomePageQueryVariables>(HomePageDocument, variables),
-      options
-    );
+export const useHomePageQuery = <TData = HomePageQuery, TError = unknown>(
+  variables?: HomePageQueryVariables,
+  options?: UseQueryOptions<HomePageQuery, TError, TData>
+) =>
+  useQuery<HomePageQuery, TError, TData>(
+    variables === undefined ? ['HomePage'] : ['HomePage', variables],
+    fetcher<HomePageQuery, HomePageQueryVariables>(HomePageDocument, variables),
+    options
+  );
 export const StaticPlaylistsPathQueryDocument = `
     query StaticPlaylistsPathQuery {
   playlists {
@@ -1727,17 +2019,22 @@ export const StaticPlaylistsPathQueryDocument = `
 }
     `;
 export const useStaticPlaylistsPathQueryQuery = <
-      TData = StaticPlaylistsPathQueryQuery,
-      TError = unknown
-    >(
-      variables?: StaticPlaylistsPathQueryQueryVariables,
-      options?: UseQueryOptions<StaticPlaylistsPathQueryQuery, TError, TData>
-    ) =>
-    useQuery<StaticPlaylistsPathQueryQuery, TError, TData>(
-      variables === undefined ? ['StaticPlaylistsPathQuery'] : ['StaticPlaylistsPathQuery', variables],
-      fetcher<StaticPlaylistsPathQueryQuery, StaticPlaylistsPathQueryQueryVariables>(StaticPlaylistsPathQueryDocument, variables),
-      options
-    );
+  TData = StaticPlaylistsPathQueryQuery,
+  TError = unknown
+>(
+  variables?: StaticPlaylistsPathQueryQueryVariables,
+  options?: UseQueryOptions<StaticPlaylistsPathQueryQuery, TError, TData>
+) =>
+  useQuery<StaticPlaylistsPathQueryQuery, TError, TData>(
+    variables === undefined
+      ? ['StaticPlaylistsPathQuery']
+      : ['StaticPlaylistsPathQuery', variables],
+    fetcher<
+      StaticPlaylistsPathQueryQuery,
+      StaticPlaylistsPathQueryQueryVariables
+    >(StaticPlaylistsPathQueryDocument, variables),
+    options
+  );
 export const StaticPostsPathDocument = `
     query StaticPostsPath {
   posts {
@@ -1746,17 +2043,22 @@ export const StaticPostsPathDocument = `
 }
     `;
 export const useStaticPostsPathQuery = <
-      TData = StaticPostsPathQuery,
-      TError = unknown
-    >(
-      variables?: StaticPostsPathQueryVariables,
-      options?: UseQueryOptions<StaticPostsPathQuery, TError, TData>
-    ) =>
-    useQuery<StaticPostsPathQuery, TError, TData>(
-      variables === undefined ? ['StaticPostsPath'] : ['StaticPostsPath', variables],
-      fetcher<StaticPostsPathQuery, StaticPostsPathQueryVariables>(StaticPostsPathDocument, variables),
-      options
-    );
+  TData = StaticPostsPathQuery,
+  TError = unknown
+>(
+  variables?: StaticPostsPathQueryVariables,
+  options?: UseQueryOptions<StaticPostsPathQuery, TError, TData>
+) =>
+  useQuery<StaticPostsPathQuery, TError, TData>(
+    variables === undefined
+      ? ['StaticPostsPath']
+      : ['StaticPostsPath', variables],
+    fetcher<StaticPostsPathQuery, StaticPostsPathQueryVariables>(
+      StaticPostsPathDocument,
+      variables
+    ),
+    options
+  );
 export const PlaylistPageDocument = `
     query PlaylistPage {
   playlists {
@@ -1775,17 +2077,20 @@ export const PlaylistPageDocument = `
 }
     `;
 export const usePlaylistPageQuery = <
-      TData = PlaylistPageQuery,
-      TError = unknown
-    >(
-      variables?: PlaylistPageQueryVariables,
-      options?: UseQueryOptions<PlaylistPageQuery, TError, TData>
-    ) =>
-    useQuery<PlaylistPageQuery, TError, TData>(
-      variables === undefined ? ['PlaylistPage'] : ['PlaylistPage', variables],
-      fetcher<PlaylistPageQuery, PlaylistPageQueryVariables>(PlaylistPageDocument, variables),
-      options
-    );
+  TData = PlaylistPageQuery,
+  TError = unknown
+>(
+  variables?: PlaylistPageQueryVariables,
+  options?: UseQueryOptions<PlaylistPageQuery, TError, TData>
+) =>
+  useQuery<PlaylistPageQuery, TError, TData>(
+    variables === undefined ? ['PlaylistPage'] : ['PlaylistPage', variables],
+    fetcher<PlaylistPageQuery, PlaylistPageQueryVariables>(
+      PlaylistPageDocument,
+      variables
+    ),
+    options
+  );
 export const PlaylistPostsDocument = `
     query PlaylistPosts($slug: String!) {
   playlists(where: {slug: $slug}) {
@@ -1804,14 +2109,17 @@ export const PlaylistPostsDocument = `
 }
     `;
 export const usePlaylistPostsQuery = <
-      TData = PlaylistPostsQuery,
-      TError = unknown
-    >(
-      variables: PlaylistPostsQueryVariables,
-      options?: UseQueryOptions<PlaylistPostsQuery, TError, TData>
-    ) =>
-    useQuery<PlaylistPostsQuery, TError, TData>(
-      ['PlaylistPosts', variables],
-      fetcher<PlaylistPostsQuery, PlaylistPostsQueryVariables>(PlaylistPostsDocument, variables),
-      options
-    );
+  TData = PlaylistPostsQuery,
+  TError = unknown
+>(
+  variables: PlaylistPostsQueryVariables,
+  options?: UseQueryOptions<PlaylistPostsQuery, TError, TData>
+) =>
+  useQuery<PlaylistPostsQuery, TError, TData>(
+    ['PlaylistPosts', variables],
+    fetcher<PlaylistPostsQuery, PlaylistPostsQueryVariables>(
+      PlaylistPostsDocument,
+      variables
+    ),
+    options
+  );
